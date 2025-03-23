@@ -7,16 +7,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // Escala para mejorar la resolución en dispositivos de alta densidad
     const scale = window.devicePixelRatio || 1;
     
-    // Configuración del canvas
-    context.scale(scale, scale);
-    context.canvas.width = canvas.width * scale;
-    context.canvas.height = canvas.height * scale;
-    canvas.style.width = canvas.width + 'px';
-    canvas.style.height = canvas.height + 'px';
-    
     const COLS = 10;
     const ROWS = 20;
-    const BLOCK_SIZE = 32;
+    let BLOCK_SIZE = 32; // Será ajustado dinámicamente
+    
+    // Función para redimensionar el canvas según el tamaño disponible
+    const resizeCanvas = () => {
+        const gameWrapper = document.querySelector('.game-wrapper');
+        const availableWidth = gameWrapper.clientWidth * 0.8; // 80% del ancho disponible
+        
+        // Calcular el tamaño de bloque basado en el ancho disponible
+        BLOCK_SIZE = Math.floor(availableWidth / COLS);
+        
+        // Actualizar dimensiones del canvas (manteniendo proporción 1:2)
+        canvas.width = COLS * BLOCK_SIZE;
+        canvas.height = ROWS * BLOCK_SIZE;
+        
+        // Configurar escala para dispositivos de alta densidad
+        context.scale(scale, scale);
+        context.canvas.width = canvas.width * scale;
+        context.canvas.height = canvas.height * scale;
+        
+        // Aplicar estilos CSS
+        canvas.style.width = canvas.width + 'px';
+        canvas.style.height = canvas.height + 'px';
+        
+        // Redibujar el juego con las nuevas dimensiones
+        if (arena && player) {
+            draw();
+        }
+    };
+    
+    // Escuchar eventos de redimensionamiento de ventana
+    window.addEventListener('resize', resizeCanvas);
     
     // Colores de las piezas
     const COLORS = [
@@ -252,6 +275,10 @@ document.addEventListener('DOMContentLoaded', () => {
         player = createPiece();
         // Game over
         if (collide(arena, player)) {
+            // Mostrar mensaje de Game Over
+            alert('¡Game Over! Tu puntuación final: ' + score);
+            
+            // Reiniciar el juego
             arena.forEach(row => row.fill(0));
             score = 0;
             scoreElement.textContent = score;
@@ -292,16 +319,22 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('down-btn').addEventListener('click', () => playerDrop());
     document.getElementById('rotate-btn').addEventListener('click', () => playerRotate(1));
     
-    // Controles móviles
-    document.getElementById('mobile-left-btn').addEventListener('click', () => playerMove(-1));
-    document.getElementById('mobile-right-btn').addEventListener('click', () => playerMove(1));
-    document.getElementById('mobile-down-btn').addEventListener('click', () => playerDrop());
-    document.getElementById('mobile-up-btn').addEventListener('click', () => playerRotate(1));
-    document.getElementById('mobile-rotate-btn').addEventListener('click', () => playerRotate(1));
+    // Botón de reinicio
+    document.getElementById('restart-btn').addEventListener('click', () => {
+        // Reiniciar el juego
+        arena.forEach(row => row.fill(0));
+        score = 0;
+        scoreElement.textContent = score;
+        dropInterval = 1000;
+        playerReset();
+    });
     
     // Inicializar variables
     const arena = createMatrix(COLS, ROWS);
     let player = createPiece();
+    
+    // Ejecutar redimensionamiento inicial
+    resizeCanvas();
     
     // Efecto de animación al cargar
     setTimeout(() => {

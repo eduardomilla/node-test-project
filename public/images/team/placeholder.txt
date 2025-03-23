@@ -1,0 +1,13 @@
+Esta carpeta debe contener imágenes de los miembros del equipo.
+
+Imágenes recomendadas:
+1. team-1.jpg - Director/a o fundador/a (400x400)
+2. team-2.jpg - Gerente de proyectos (400x400)
+3. team-3.jpg - Especialista técnico (400x400)
+4. team-4.jpg - Instalador principal (400x400)
+
+Puedes obtener imágenes libres de derechos en Unsplash.com, buscando términos como:
+- construction worker
+- professional portrait
+- contractor
+- business person 

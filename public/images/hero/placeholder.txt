@@ -1,0 +1,12 @@
+Esta carpeta debe contener imágenes de fondo para la sección hero del sitio web.
+
+Imágenes recomendadas:
+1. drywall-bg.jpg - Imagen principal de portada (1920x1080)
+2. hero-services.jpg - Imagen para la sección de servicios (1920x600)
+3. hero-about.jpg - Imagen para la sección nosotros (1920x600)
+
+Puedes obtener imágenes libres de derechos en Unsplash.com, buscando términos como:
+- construction
+- drywall
+- renovation
+- interior design 

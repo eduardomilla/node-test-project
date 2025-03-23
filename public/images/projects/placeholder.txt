@@ -1,0 +1,15 @@
+Esta carpeta debe contener imágenes de proyectos realizados por la empresa.
+
+Imágenes recomendadas:
+1. project-1.jpg - Proyecto residencial (800x600)
+2. project-2.jpg - Proyecto comercial (800x600)
+3. project-3.jpg - Proyecto de oficina (800x600)
+4. project-4.jpg - Proyecto de remodelación (800x600)
+5. project-5.jpg - Proyecto personalizado (800x600)
+6. project-6.jpg - Proyecto de gran escala (800x600)
+
+Puedes obtener imágenes libres de derechos en Unsplash.com, buscando términos como:
+- drywall installation
+- construction project
+- interior walls
+- renovation project 

@@ -1,0 +1,13 @@
+Esta carpeta debe contener imágenes relacionadas con los servicios ofrecidos.
+
+Imágenes recomendadas:
+1. service-residential.jpg - Instalación residencial (800x600)
+2. service-commercial.jpg - Instalación comercial (800x600)
+3. service-repair.jpg - Reparación y mantenimiento (800x600)
+4. service-design.jpg - Diseño personalizado (800x600)
+
+Puedes obtener imágenes libres de derechos en Unsplash.com, buscando términos como:
+- drywall installation
+- wall repair
+- home renovation
+- interior construction 
