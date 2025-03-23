@@ -1,93 +1,141 @@
-<section class="page-header">
-    <div class="container">
-        <h1 class="animate__animated animate__fadeInDown">Contáctanos</h1>
-        <p class="animate__animated animate__fadeIn animate__delay-1s">Estamos aquí para ayudarte con tu próximo proyecto</p>
+<%- contentFor('body') %>
+
+<section class="hero-small py-5 bg-dark text-white position-relative overflow-hidden">
+    <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold" data-aos="fade-up">Contáctanos</h1>
+        <p class="lead" data-aos="fade-up" data-aos-delay="200">Estamos aquí para ayudarte con tu próximo proyecto</p>
+        <div class="construction-element triangle" style="width: 120px; height: 120px; top: 20%; left: 5%;"></div>
+        <div class="construction-element circle" style="width: 80px; height: 80px; top: 70%; left: 15%;"></div>
+        <div class="construction-element square" style="width: 100px; height: 100px; top: 30%; right: 10%;"></div>
     </div>
 </section>
 
-<section class="contact-section">
+<section class="contact-section py-5">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6" data-aos="fade-right">
-                <div class="contact-info">
-                    <h2 class="mb-4">Información de Contacto</h2>
-                    <div class="contact-item scale-hover">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Dirección</h4>
-                            <p>Av. Principal 123, Ciudad</p>
+        <div class="row g-4">
+            <div class="col-lg-5" data-aos="fade-right">
+                <div class="contact-info-card shadow h-100">
+                    <div class="section-title mb-4">
+                        <h2 class="h3 fw-bold gradient-text">Información de Contacto</h2>
+                        <div class="title-separator"></div>
+                    </div>
+                    
+                    <div class="contact-items">
+                        <div class="contact-item hover-float" data-aos="fade-up" data-aos-delay="100">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Dirección</h4>
+                                <p>Av. Principal 123, Ciudad</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item hover-float" data-aos="fade-up" data-aos-delay="200">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Teléfono</h4>
+                                <p>+51 123 456 789</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item hover-float" data-aos="fade-up" data-aos-delay="300">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>info@drywallpro.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item hover-float" data-aos="fade-up" data-aos-delay="400">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Horario de Atención</h4>
+                                <p>Lunes a Viernes: 9:00 AM - 6:00 PM<br>
+                                Sábados: 9:00 AM - 1:00 PM</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="contact-item scale-hover">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>Teléfono</h4>
-                            <p>+51 123 456 789</p>
-                        </div>
-                    </div>
-                    <div class="contact-item scale-hover">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@drywallpro.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item scale-hover">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <h4>Horario de Atención</h4>
-                            <p>Lunes a Viernes: 9:00 AM - 6:00 PM<br>
-                            Sábados: 9:00 AM - 1:00 PM</p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="social-links mt-5" data-aos="fade-up" data-aos-delay="200">
-                    <h3>Síguenos en Redes Sociales</h3>
-                    <div class="d-flex gap-3 mt-3">
-                        <a href="https://wa.me/51123456789" class="btn btn-success animate__animated animate__pulse animate__infinite animate__slower">
-                            <i class="fab fa-whatsapp me-2"></i>WhatsApp
-                        </a>
-                        <a href="https://facebook.com/drywallpro" class="btn btn-primary">
-                            <i class="fab fa-facebook me-2"></i>Facebook
-                        </a>
-                        <a href="https://instagram.com/drywallpro" class="btn btn-danger">
-                            <i class="fab fa-instagram me-2"></i>Instagram
-                        </a>
+                    <div class="social-connect mt-4" data-aos="fade-up">
+                        <h4 class="text-center mb-3">Conecta con nosotros</h4>
+                        <div class="contact-social-links">
+                            <a href="https://wa.me/51123456789" class="contact-social-icon whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="https://facebook.com/drywallpro" class="contact-social-icon facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://instagram.com/drywallpro" class="contact-social-icon instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://linkedin.com/company/drywallpro" class="contact-social-icon linkedin">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6" data-aos="fade-left">
-                <div class="contact-form">
-                    <h2 class="mb-4">Envíanos un Mensaje</h2>
-                    <form>
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre Completo</label>
-                            <input type="text" class="form-control" id="nombre" required>
+            
+            <div class="col-lg-7" data-aos="fade-left">
+                <div class="contact-form-card shadow">
+                    <div class="section-title mb-4">
+                        <h2 class="h3 fw-bold gradient-text">Envíanos un Mensaje</h2>
+                        <div class="title-separator"></div>
+                    </div>
+                    
+                    <form class="contact-form">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre completo" required>
+                                    <label for="nombre"><i class="fas fa-user me-2"></i>Nombre Completo</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="email" placeholder="Email" required>
+                                    <label for="email"><i class="fas fa-envelope me-2"></i>Email</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="tel" class="form-control" id="telefono" placeholder="Teléfono">
+                                    <label for="telefono"><i class="fas fa-phone me-2"></i>Teléfono</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" id="asunto" required>
+                                        <option value="" selected disabled>Selecciona un asunto</option>
+                                        <option value="cotizacion">Solicitar Cotización</option>
+                                        <option value="informacion">Información General</option>
+                                        <option value="reclamo">Reclamo</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                    <label for="asunto"><i class="fas fa-tag me-2"></i>Asunto</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control" id="mensaje" placeholder="Mensaje" style="height: 150px" required></textarea>
+                                    <label for="mensaje"><i class="fas fa-comment me-2"></i>Mensaje</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg hover-glow">
+                                        <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="telefono" class="form-label">Teléfono</label>
-                            <input type="tel" class="form-control" id="telefono">
-                        </div>
-                        <div class="mb-3">
-                            <label for="asunto" class="form-label">Asunto</label>
-                            <select class="form-select" id="asunto" required>
-                                <option value="">Selecciona un asunto</option>
-                                <option value="cotizacion">Solicitar Cotización</option>
-                                <option value="informacion">Información General</option>
-                                <option value="reclamo">Reclamo</option>
-                                <option value="otro">Otro</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="mensaje" class="form-label">Mensaje</label>
-                            <textarea class="form-control" id="mensaje" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
                     </form>
                 </div>
             </div>
@@ -95,19 +143,38 @@
     </div>
 </section>
 
-<section class="map-section" data-aos="fade-up">
-    <div class="container">
-        <h2 class="text-center mb-4">Nuestra Ubicación</h2>
-        <div class="map-container">
-            <!-- Para cambiar la ubicación del mapa: 
-                1. Ve a Google Maps (https://maps.google.com)
-                2. Busca la ubicación exacta de tu local
-                3. Haz clic en "Compartir"
-                4. Selecciona "Incorporar un mapa"
-                5. Copia el código iframe y reemplaza este iframe -->
-            <div class="ratio ratio-16x9 shadow-lg rounded overflow-hidden">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d250.821038240475!2d-80.4463574982892!3d-3.5812660310253435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses-419!2spe!4v1742689907113!5m2!1ses-419!2spe" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<section class="map-section py-5 bg-light">
+    <div class="container" data-aos="fade-up">
+        <div class="section-title text-center mb-5">
+            <h2 class="display-5 fw-bold">Nuestra Ubicación</h2>
+            <div class="title-separator mx-auto"></div>
+        </div>
+        
+        <div class="map-container position-relative" data-aos="zoom-in">
+            <div class="ratio ratio-21x9 shadow-lg rounded overflow-hidden">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d250.821038240475!2d-80.4463574982892!3d-3.5812660310253435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses-419!2spe!4v1742689907113!5m2!1ses-419!2spe" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
+            <div class="construction-element triangle" style="width: 40px; height: 40px; top: -15px; left: -15px; opacity: 0.6;"></div>
+            <div class="construction-element square" style="width: 30px; height: 30px; bottom: -10px; right: -10px; opacity: 0.6;"></div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-md-8 mx-auto text-center">
+                <div class="map-info p-4 rounded shadow-sm" data-aos="fade-up">
+                    <h3 class="h4 mb-3">¿Cómo llegar?</h3>
+                    <p class="mb-0">Estamos ubicados en una zona céntrica y de fácil acceso. Si necesitas indicaciones más precisas, no dudes en contactarnos por teléfono o WhatsApp. ¡Estaremos encantados de ayudarte!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section py-5 text-white">
+    <div class="container" data-aos="fade-up">
+        <div class="cta-content text-center py-5">
+            <h2 class="display-5 mb-4 fw-bold">¿Listo para tu proyecto de drywall?</h2>
+            <p class="lead mb-4">Contáctanos hoy mismo para comenzar a planificar tu proyecto</p>
+            <a href="https://wa.me/51123456789" class="btn btn-light btn-lg hover-glow"><i class="fab fa-whatsapp me-2"></i>Contactar por WhatsApp</a>
         </div>
     </div>
 </section> 

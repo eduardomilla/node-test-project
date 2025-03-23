@@ -35,6 +35,16 @@
                                     <i class="fas fa-redo me-2"></i>Reiniciar
                                 </button>
                             </div>
+                            
+                            <div class="mobile-instructions mt-4 d-md-none">
+                                <h4><i class="fas fa-mobile-alt me-2"></i>En dispositivos móviles:</h4>
+                                <ul>
+                                    <li>Desliza para mover y rotar</li>
+                                    <li>Toca la pantalla para rotar</li>
+                                    <li>Doble toque para caída rápida</li>
+                                    <li>O usa los botones táctiles abajo</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     
@@ -63,6 +73,64 @@
                             <div class="next-piece-container">
                                 <h4>Siguiente</h4>
                                 <canvas id="nextPiece" width="80" height="80" class="mx-auto d-block"></canvas>
+                            </div>
+                            
+                            <!-- Teclado flotante para móviles -->
+                            <div class="virtual-keyboard d-md-none">
+                                <div class="keyboard-container">
+                                    <div class="keyboard-title">
+                                        <h5><i class="fas fa-gamepad me-2"></i>Controles</h5>
+                                    </div>
+                                    <div class="keyboard-layout">
+                                        <table class="keyboard-table">
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <button id="touchRotate" class="key-btn rotate-btn" aria-label="Rotar">
+                                                        <i class="fas fa-arrow-up"></i>
+                                                    </button>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button id="touchLeft" class="key-btn left-btn" aria-label="Izquierda">
+                                                        <i class="fas fa-arrow-left"></i>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button id="touchDown" class="key-btn down-btn" aria-label="Abajo">
+                                                        <i class="fas fa-arrow-down"></i>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button id="touchRight" class="key-btn right-btn" aria-label="Derecha">
+                                                        <i class="fas fa-arrow-right"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <button id="touchDrop" class="key-btn drop-btn" aria-label="Caída rápida">
+                                                        <i class="fas fa-angle-double-down"></i>
+                                                    </button>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="keyboard-actions">
+                                        <button id="keyboardPlayPause" class="key-action-btn play-btn" aria-label="Pausar/Reanudar">
+                                            <i class="fas fa-play me-1"></i> / <i class="fas fa-pause me-1"></i>
+                                            <span>Jugar/Pausar</span>
+                                        </button>
+                                        <button id="keyboardReset" class="key-action-btn reset-btn" aria-label="Reiniciar">
+                                            <i class="fas fa-redo me-1"></i>
+                                            <span>Reiniciar</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -12,6 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const playButton = document.getElementById('playButton');
     const resetButton = document.getElementById('resetButton');
     
+    // Botones táctiles para dispositivos móviles
+    const touchLeftBtn = document.getElementById('touchLeft');
+    const touchRightBtn = document.getElementById('touchRight');
+    const touchDownBtn = document.getElementById('touchDown');
+    const touchRotateBtn = document.getElementById('touchRotate');
+    const touchDropBtn = document.getElementById('touchDrop');
+    
+    // Botones adicionales del teclado virtual
+    const keyboardPlayPauseBtn = document.getElementById('keyboardPlayPause');
+    const keyboardResetBtn = document.getElementById('keyboardReset');
+    
     // Configuración
     const scale = 20;
     const boardWidth = canvas.width / scale;
@@ -521,25 +532,75 @@ document.addEventListener('DOMContentLoaded', () => {
         switch (event.key) {
             case 'ArrowLeft':
                 if (!paused) playerMove(-1);
+                event.preventDefault();
                 break;
             case 'ArrowRight':
                 if (!paused) playerMove(1);
+                event.preventDefault();
                 break;
             case 'ArrowDown':
                 if (!paused) playerDrop();
+                event.preventDefault();
                 break;
             case 'ArrowUp':
                 if (!paused) playerRotate(1);
+                event.preventDefault();
                 break;
             case ' ':
                 if (!paused) playerDropToBottom();
+                event.preventDefault();
                 break;
             case 'p':
             case 'P':
                 startGame();
+                event.preventDefault();
                 break;
         }
     });
+    
+    // Controles táctiles para móviles
+    if (touchLeftBtn) {
+        touchLeftBtn.addEventListener('click', () => {
+            if (!paused && !gameOver) playerMove(-1);
+        });
+    }
+    
+    if (touchRightBtn) {
+        touchRightBtn.addEventListener('click', () => {
+            if (!paused && !gameOver) playerMove(1);
+        });
+    }
+    
+    if (touchDownBtn) {
+        touchDownBtn.addEventListener('click', () => {
+            if (!paused && !gameOver) playerDrop();
+        });
+    }
+    
+    if (touchRotateBtn) {
+        touchRotateBtn.addEventListener('click', () => {
+            if (!paused && !gameOver) playerRotate(1);
+        });
+    }
+    
+    if (touchDropBtn) {
+        touchDropBtn.addEventListener('click', () => {
+            if (!paused && !gameOver) playerDropToBottom();
+        });
+    }
+    
+    // Controles del teclado virtual adicionales
+    if (keyboardPlayPauseBtn) {
+        keyboardPlayPauseBtn.addEventListener('click', () => {
+            startGame();
+        });
+    }
+    
+    if (keyboardResetBtn) {
+        keyboardResetBtn.addEventListener('click', () => {
+            resetGame();
+        });
+    }
     
     // Controles de botones
     playButton.addEventListener('click', startGame);
@@ -580,6 +641,68 @@ document.addEventListener('DOMContentLoaded', () => {
         initGradients();
         draw();
     }
+    
+    // Añadir detección de eventos táctiles para swipe
+    let touchStartX = 0;
+    let touchStartY = 0;
+    
+    canvas.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        e.preventDefault();
+    }, { passive: false });
+    
+    canvas.addEventListener('touchend', function(e) {
+        if (paused || gameOver) return;
+        
+        const touchEndX = e.changedTouches[0].screenX;
+        const touchEndY = e.changedTouches[0].screenY;
+        
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        
+        // Determinar dirección del swipe
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            // Swipe horizontal
+            if (diffX > 50) {
+                playerMove(1); // Swipe derecha
+            } else if (diffX < -50) {
+                playerMove(-1); // Swipe izquierda
+            }
+        } else {
+            // Swipe vertical
+            if (diffY > 50) {
+                playerDrop(); // Swipe abajo
+            } else if (diffY < -50) {
+                playerRotate(1); // Swipe arriba
+            }
+        }
+        
+        e.preventDefault();
+    }, { passive: false });
+    
+    // Tap para rotar
+    canvas.addEventListener('click', function() {
+        if (!paused && !gameOver) {
+            playerRotate(1);
+        }
+    });
+    
+    // Doble tap para drop
+    let lastTap = 0;
+    canvas.addEventListener('touchend', function(e) {
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTap;
+        
+        if (tapLength < 300 && tapLength > 0) {
+            if (!paused && !gameOver) {
+                playerDropToBottom();
+            }
+            e.preventDefault();
+        }
+        
+        lastTap = currentTime;
+    });
     
     window.addEventListener('resize', adjustGameSize);
     adjustGameSize();

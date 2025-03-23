@@ -1,41 +1,69 @@
 <%- contentFor('body') %>
 
 <section class="hero-section">
-    <div class="container">
-        <div class="row align-items-center">
+    <div class="container position-relative">
+        <div class="hero-dots-decoration"></div>
+        <div class="row align-items-center gy-5">
             <div class="col-md-6" data-aos="fade-right">
-                <h1 class="animate__animated animate__fadeInDown">Soluciones en Drywall de Primera Calidad</h1>
-                <p class="lead animate__animated animate__fadeIn animate__delay-1s">Ofrecemos servicios profesionales de instalación, reparación y diseño de drywall para proyectos residenciales y comerciales.</p>
-                <a href="/contacto" class="btn btn-primary btn-lg animate__animated animate__fadeInUp animate__delay-1s">Solicitar Cotización</a>
+                <div class="hero-content pe-md-5">
+                    <span class="hero-subtitle d-block mb-3" data-aos="fade-up">Expertos en Drywall</span>
+                    <h1 class="animate__animated animate__fadeInDown mb-4">Soluciones en Drywall de Primera Calidad</h1>
+                    <p class="lead animate__animated animate__fadeIn animate__delay-1s mb-5">Ofrecemos servicios profesionales de instalación, reparación y diseño de drywall para proyectos residenciales y comerciales.</p>
+                    <div class="d-flex flex-wrap gap-4 mt-5">
+                        <a href="/contacto" class="btn btn-primary btn-lg animate__animated animate__fadeInUp animate__delay-1s">
+                            <i class="fas fa-file-invoice me-2"></i>Solicitar Cotización
+                        </a>
+                        <a href="/servicios" class="btn btn-outline-light btn-lg animate__animated animate__fadeInUp animate__delay-1s">
+                            <i class="fas fa-tools me-2"></i>Nuestros Servicios
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="col-md-6 d-flex justify-content-center" data-aos="fade-left" data-aos-delay="200">
-                <img src="https://images.unsplash.com/photo-1541189065044-d4bf1376bfce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Drywall Illustration" class="img-fluid hero-image">
+                <div class="hero-image-container">
+                    <img src="https://images.unsplash.com/photo-1541189065044-d4bf1376bfce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Drywall Illustration" class="img-fluid hero-image rounded shadow-lg">
+                    <div class="hero-decoration-element top-left"></div>
+                    <div class="hero-decoration-element bottom-right"></div>
+                </div>
             </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <a href="#features" class="scroll-down">
+                <i class="fas fa-chevron-down"></i>
+            </a>
         </div>
     </div>
 </section>
 
 <section class="features-section">
     <div class="container">
-        <h2 class="text-center mb-5" data-aos="fade-up">¿Por qué elegirnos?</h2>
-        <div class="row">
-            <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+        <h2 class="text-center mb-4 section-title" data-aos="fade-up">¿Por qué elegirnos?</h2>
+        <div class="title-separator" data-aos="fade-up" data-aos-delay="100"></div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
                 <div class="feature-card scale-hover">
-                    <i class="fas fa-certificate fa-3x mb-4"></i>
+                    <div class="feature-icon-wrap">
+                        <i class="fas fa-certificate fa-3x mb-4"></i>
+                    </div>
                     <h3>Calidad Garantizada</h3>
                     <p>Comprometidos con la excelencia en cada proyecto que realizamos.</p>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                 <div class="feature-card scale-hover">
-                    <i class="fas fa-clock fa-3x mb-4"></i>
+                    <div class="feature-icon-wrap">
+                        <i class="fas fa-clock fa-3x mb-4"></i>
+                    </div>
                     <h3>Entrega Puntual</h3>
                     <p>Cumplimos con los plazos establecidos sin comprometer la calidad.</p>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="col-lg-4 col-md-6 mx-auto" data-aos="zoom-in" data-aos-delay="300">
                 <div class="feature-card scale-hover">
-                    <i class="fas fa-tools fa-3x mb-4"></i>
+                    <div class="feature-icon-wrap">
+                        <i class="fas fa-tools fa-3x mb-4"></i>
+                    </div>
                     <h3>Experiencia</h3>
                     <p>Contamos con profesionales experimentados en el ramo del drywall.</p>
                 </div>
@@ -44,7 +72,8 @@
     </div>
 </section>
 
-<section class="cta-section">
+<section class="cta-section parallax-bg">
+    <div class="cta-overlay"></div>
     <div class="container text-center" data-aos="fade-up">
         <h2 class="animate__animated animate__fadeIn">¿Listo para comenzar tu proyecto?</h2>
         <p class="lead mb-4 animate__animated animate__fadeIn animate__delay-1s">Permítenos ayudarte a hacer realidad tus ideas.</p>
@@ -54,106 +83,228 @@
 
 <section id="servicios" class="services-section">
     <div class="container">
-        <h2 class="text-center mb-5">Nuestros Servicios</h2>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="service-card">
-                    <i class="fas fa-hammer fa-3x mb-4 text-primary"></i>
+        <h2 class="text-center mb-4 section-title">Nuestros Servicios</h2>
+        <div class="title-separator mb-5"></div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card hover-scale">
+                    <div class="service-icon">
+                        <i class="fas fa-hammer fa-3x mb-4 text-primary"></i>
+                    </div>
                     <h3>Instalación de Drywall</h3>
                     <p>Instalación profesional de paredes y techos de drywall con los más altos estándares de calidad.</p>
+                    <a href="/servicios#instalacion" class="service-link">Más información <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="service-card">
-                    <i class="fas fa-tools fa-3x mb-4 text-primary"></i>
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card hover-scale">
+                    <div class="service-icon">
+                        <i class="fas fa-tools fa-3x mb-4 text-primary"></i>
+                    </div>
                     <h3>Reparaciones</h3>
                     <p>Reparación y mantenimiento de estructuras existentes con garantía de durabilidad.</p>
+                    <a href="/servicios#reparaciones" class="service-link">Más información <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="service-card">
-                    <i class="fas fa-pencil-ruler fa-3x mb-4 text-primary"></i>
+            <div class="col-lg-4 col-md-6 mx-auto">
+                <div class="service-card hover-scale">
+                    <div class="service-icon">
+                        <i class="fas fa-pencil-ruler fa-3x mb-4 text-primary"></i>
+                    </div>
                     <h3>Diseño Personalizado</h3>
                     <p>Soluciones personalizadas para cada proyecto, adaptadas a tus necesidades específicas.</p>
+                    <a href="/servicios#diseno" class="service-link">Más información <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
-        <div class="text-center mt-4">
-            <a href="/servicios" class="btn btn-outline-primary">Ver Todos Nuestros Servicios</a>
+        
+        <div class="text-center mt-5">
+            <a href="/servicios" class="btn btn-outline-primary btn-lg hover-glow">Ver Todos Nuestros Servicios</a>
         </div>
     </div>
 </section>
 
-<section class="projects-preview-section py-5 bg-light">
+<section class="projects-preview-section py-5">
     <div class="container">
-        <h2 class="text-center mb-5">Proyectos Destacados</h2>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="project-card">
+        <h2 class="text-center mb-4 section-title">Proyectos Destacados</h2>
+        <div class="title-separator mb-5"></div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card hover-float">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Proyecto Residencial" class="img-fluid">
+                        <img src="https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Proyecto Residencial" class="img-fluid">
                         <div class="project-overlay">
                             <a href="/proyectos" class="btn btn-primary btn-sm">Ver Más</a>
                         </div>
                     </div>
                     <div class="project-content">
+                        <span class="project-badge">Residencial</span>
                         <h3>Remodelación Apartamento</h3>
-                        <p class="project-category">Residencial</p>
+                        <p class="project-category">Diseño e instalación de muros divisorios y techos decorativos.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Miraflores</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2024</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="project-card">
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card hover-float">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Proyecto Comercial" class="img-fluid">
+                        <img src="https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Proyecto Comercial" class="img-fluid">
                         <div class="project-overlay">
                             <a href="/proyectos" class="btn btn-primary btn-sm">Ver Más</a>
                         </div>
                     </div>
                     <div class="project-content">
+                        <span class="project-badge">Comercial</span>
                         <h3>Centro Comercial</h3>
-                        <p class="project-category">Comercial</p>
+                        <p class="project-category">Instalación de cielos rasos y divisiones para locales comerciales.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> San Isidro</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2023</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="project-card">
+            <div class="col-lg-4 col-md-6 mx-auto">
+                <div class="project-card hover-float">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Proyecto Oficinas" class="img-fluid">
+                        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Proyecto Oficinas" class="img-fluid">
                         <div class="project-overlay">
                             <a href="/proyectos" class="btn btn-primary btn-sm">Ver Más</a>
                         </div>
                     </div>
                     <div class="project-content">
+                        <span class="project-badge">Oficinas</span>
                         <h3>Oficinas Corporativas</h3>
-                        <p class="project-category">Oficinas</p>
+                        <p class="project-category">Diseño e implementación de espacios de trabajo modernos.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> San Borja</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2023</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="text-center mt-4">
-            <a href="/proyectos" class="btn btn-outline-primary">Ver Todos Los Proyectos</a>
+        
+        <div class="text-center mt-5">
+            <a href="/proyectos" class="btn btn-outline-primary btn-lg hover-glow">Ver Todos Los Proyectos</a>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials-section">
+    <div class="container">
+        <h2 class="text-center mb-4 section-title">Lo que dicen nuestros clientes</h2>
+        <div class="title-separator mb-5"></div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                    <p>Excelente servicio y calidad en la instalación. Cumplieron con el tiempo prometido y el acabado fue impecable.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Cliente" class="testimonial-img">
+                        <div>
+                            <h4>María Rodríguez</h4>
+                            <p>Proyecto Residencial</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                    <p>Contratamos a DrywallPro para la remodelación de nuestras oficinas y quedamos muy satisfechos. Profesionales en todo momento.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente" class="testimonial-img">
+                        <div>
+                            <h4>Carlos Mendoza</h4>
+                            <p>Proyecto Comercial</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mx-auto">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                    <p>Terminaron antes del plazo estipulado y la calidad del trabajo superó nuestras expectativas. Totalmente recomendados.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Cliente" class="testimonial-img">
+                        <div>
+                            <h4>Laura Jiménez</h4>
+                            <p>Proyecto Residencial</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 <section class="contact-preview-section">
     <div class="container text-center">
-        <h2 class="mb-4">Contáctanos</h2>
-        <p class="mb-5">Estamos aquí para ayudarte con tu próximo proyecto</p>
-        <div class="social-links d-flex justify-content-center">
-            <a href="https://wa.me/51123456789" class="social-icon">
+        <h2 class="mb-4 section-title">Contáctanos</h2>
+        <div class="title-separator mb-4"></div>
+        <p class="mb-5 lead">Estamos aquí para ayudarte con tu próximo proyecto</p>
+        
+        <div class="row g-4 mb-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-info-text">
+                        <h4>Dirección</h4>
+                        <p>Calle Principal #123, Ciudad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-info-text">
+                        <h4>Teléfono</h4>
+                        <p>+123 456 7890</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mx-auto">
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-info-text">
+                        <h4>Email</h4>
+                        <p>info@drywallpro.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="social-links d-flex justify-content-center mt-5 mb-4">
+            <a href="https://wa.me/51123456789" class="social-icon whatsapp hover-scale" aria-label="WhatsApp">
                 <i class="fab fa-whatsapp"></i>
             </a>
-            <a href="https://facebook.com/drywallpro" class="social-icon">
+            <a href="https://facebook.com/drywallpro" class="social-icon facebook hover-scale" aria-label="Facebook">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="https://instagram.com/drywallpro" class="social-icon">
+            <a href="https://instagram.com/drywallpro" class="social-icon instagram hover-scale" aria-label="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
+            <a href="https://linkedin.com/company/drywallpro" class="social-icon linkedin hover-scale" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
         </div>
+        
         <div class="mt-4">
-            <a href="/contacto" class="btn btn-primary">Envíanos un mensaje</a>
+            <a href="/contacto" class="btn btn-primary btn-lg hover-glow">Envíanos un mensaje</a>
+            <a href="/tetris" class="btn btn-outline-primary btn-lg ms-3 hover-glow">Juega mientras esperas</a>
         </div>
     </div>
 </section>

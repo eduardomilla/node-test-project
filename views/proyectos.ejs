@@ -1,167 +1,154 @@
-<section class="page-header">
-    <div class="container">
-        <h1>Nuestros Proyectos</h1>
-        <p>Conoce algunos de nuestros trabajos más destacados</p>
+<%- contentFor('body') %>
+
+<section class="hero-small py-5 bg-dark text-white position-relative overflow-hidden">
+    <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold" data-aos="fade-up">Nuestros Proyectos</h1>
+        <p class="lead" data-aos="fade-up" data-aos-delay="200">Conoce algunos de nuestros trabajos más destacados</p>
+        <div class="construction-element triangle" style="width: 120px; height: 120px; top: 20%; left: 5%;"></div>
+        <div class="construction-element circle" style="width: 80px; height: 80px; top: 70%; left: 15%;"></div>
+        <div class="construction-element square" style="width: 100px; height: 100px; top: 30%; right: 10%;"></div>
     </div>
 </section>
 
-<section class="projects-section">
-    <div class="container">
-        <div class="project-filters">
-            <button class="filter-btn active" data-filter="all">Todos</button>
-            <button class="filter-btn" data-filter="residential">Residencial</button>
-            <button class="filter-btn" data-filter="commercial">Comercial</button>
-            <button class="filter-btn" data-filter="office">Oficinas</button>
+<section class="projects-section py-5">
+    <div class="container" data-aos="fade-up">
+        <div class="project-filters mb-5 d-flex justify-content-center flex-wrap" data-aos="fade-up">
+            <button class="filter-btn active me-2 mb-2 hover-glow" data-filter="all">
+                <i class="fas fa-th me-2"></i>Todos
+            </button>
+            <button class="filter-btn me-2 mb-2 hover-glow" data-filter="residential">
+                <i class="fas fa-home me-2"></i>Residencial
+            </button>
+            <button class="filter-btn me-2 mb-2 hover-glow" data-filter="commercial">
+                <i class="fas fa-store me-2"></i>Comercial
+            </button>
+            <button class="filter-btn me-2 mb-2 hover-glow" data-filter="office">
+                <i class="fas fa-building me-2"></i>Oficinas
+            </button>
         </div>
 
-        <div class="row project-grid">
+        <div class="row g-4 project-grid">
             <!-- Proyecto 1 -->
-            <div class="col-md-6 col-lg-4 project-item" data-category="residential">
-                <div class="project-card fade-in">
+            <div class="col-md-6 col-lg-4 project-item" data-category="residential" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-card hover-float shadow">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80" alt="Proyecto Residencial 1">
+                        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1287&amp;q=80" alt="Proyecto Residencial 1" class="img-fluid">
                         <div class="project-overlay">
-                            <a href="#" class="btn">Ver Detalles</a>
+                            <a href="#" class="btn btn-primary">Ver Detalles</a>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <span class="project-category">Residencial</span>
-                        <h3>Remodelación Apartamento</h3>
-                        <p>Remodelación completa de apartamento de 120m² con instalación de drywall en paredes y techos.</p>
+                    <div class="project-content p-4">
+                        <span class="project-category badge bg-primary mb-2">Residencial</span>
+                        <h3 class="h4 mb-3">Remodelación Apartamento</h3>
+                        <p class="text-muted">Remodelación completa de apartamento de 120m² con instalación de drywall en paredes y techos.</p>
+                        <div class="project-meta mt-3 d-flex justify-content-between">
+                            <span><i class="fas fa-calendar-alt me-2"></i>Marzo 2023</span>
+                            <span><i class="fas fa-map-marker-alt me-2"></i>Lima</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Proyecto 2 -->
-            <div class="col-md-6 col-lg-4 project-item" data-category="commercial">
-                <div class="project-card fade-in">
+            <div class="col-md-6 col-lg-4 project-item" data-category="commercial" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-card hover-float shadow">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1604770322933-87d3797abdc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80" alt="Proyecto Comercial">
+                        <img src="https://images.unsplash.com/photo-1604770322933-87d3797abdc2?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1287&amp;q=80" alt="Proyecto Comercial" class="img-fluid">
                         <div class="project-overlay">
-                            <a href="#" class="btn">Ver Detalles</a>
+                            <a href="#" class="btn btn-primary">Ver Detalles</a>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <span class="project-category">Comercial</span>
-                        <h3>Centro Comercial El Dorado</h3>
-                        <p>Instalación de cielos rasos y divisiones interiores para 15 locales comerciales.</p>
+                    <div class="project-content p-4">
+                        <span class="project-category badge bg-success mb-2">Comercial</span>
+                        <h3 class="h4 mb-3">Centro Comercial El Dorado</h3>
+                        <p class="text-muted">Instalación de cielos rasos y divisiones interiores para 15 locales comerciales.</p>
+                        <div class="project-meta mt-3 d-flex justify-content-between">
+                            <span><i class="fas fa-calendar-alt me-2"></i>Junio 2023</span>
+                            <span><i class="fas fa-map-marker-alt me-2"></i>Trujillo</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Proyecto 3 -->
-            <div class="col-md-6 col-lg-4 project-item" data-category="office">
-                <div class="project-card fade-in">
+            <div class="col-md-6 col-lg-4 project-item" data-category="office" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-card hover-float shadow">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Proyecto Oficina">
+                        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1169&amp;q=80" alt="Proyecto Oficina" class="img-fluid">
                         <div class="project-overlay">
-                            <a href="#" class="btn">Ver Detalles</a>
+                            <a href="#" class="btn btn-primary">Ver Detalles</a>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <span class="project-category">Oficinas</span>
-                        <h3>Oficinas Tech Solutions</h3>
-                        <p>Diseño e instalación de divisiones de espacios de trabajo y salas de reuniones.</p>
+                    <div class="project-content p-4">
+                        <span class="project-category badge bg-info mb-2">Oficinas</span>
+                        <h3 class="h4 mb-3">Oficinas Tech Solutions</h3>
+                        <p class="text-muted">Diseño e instalación de divisiones de espacios de trabajo y salas de reuniones.</p>
+                        <div class="project-meta mt-3 d-flex justify-content-between">
+                            <span><i class="fas fa-calendar-alt me-2"></i>Mayo 2023</span>
+                            <span><i class="fas fa-map-marker-alt me-2"></i>Lima</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Proyecto 4 -->
-            <div class="col-md-6 col-lg-4 project-item" data-category="residential">
-                <div class="project-card fade-in">
+            <div class="col-md-6 col-lg-4 project-item" data-category="residential" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-card hover-float shadow">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Proyecto Residencial 2">
+                        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1170&amp;q=80" alt="Proyecto Residencial 2" class="img-fluid">
                         <div class="project-overlay">
-                            <a href="#" class="btn">Ver Detalles</a>
+                            <a href="#" class="btn btn-primary">Ver Detalles</a>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <span class="project-category">Residencial</span>
-                        <h3>Villa Moderna</h3>
-                        <p>Diseño e instalación de techos decorativos y paredes con nichos en residencia de lujo.</p>
+                    <div class="project-content p-4">
+                        <span class="project-category badge bg-primary mb-2">Residencial</span>
+                        <h3 class="h4 mb-3">Villa Moderna</h3>
+                        <p class="text-muted">Diseño e instalación de techos decorativos y paredes con nichos en residencia de lujo.</p>
+                        <div class="project-meta mt-3 d-flex justify-content-between">
+                            <span><i class="fas fa-calendar-alt me-2"></i>Febrero 2023</span>
+                            <span><i class="fas fa-map-marker-alt me-2"></i>Cusco</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Proyecto 5 -->
-            <div class="col-md-6 col-lg-4 project-item" data-category="commercial">
-                <div class="project-card fade-in">
+            <div class="col-md-6 col-lg-4 project-item" data-category="commercial" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-card hover-float shadow">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Proyecto Restaurante">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1074&amp;q=80" alt="Proyecto Restaurante" class="img-fluid">
                         <div class="project-overlay">
-                            <a href="#" class="btn">Ver Detalles</a>
+                            <a href="#" class="btn btn-primary">Ver Detalles</a>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <span class="project-category">Comercial</span>
-                        <h3>Restaurante El Sabor</h3>
-                        <p>Implementación de paredes acústicas y cielo raso decorativo para restaurante.</p>
+                    <div class="project-content p-4">
+                        <span class="project-category badge bg-success mb-2">Comercial</span>
+                        <h3 class="h4 mb-3">Restaurante El Sabor</h3>
+                        <p class="text-muted">Implementación de paredes acústicas y cielo raso decorativo para restaurante.</p>
+                        <div class="project-meta mt-3 d-flex justify-content-between">
+                            <span><i class="fas fa-calendar-alt me-2"></i>Abril 2023</span>
+                            <span><i class="fas fa-map-marker-alt me-2"></i>Arequipa</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Proyecto 6 -->
-            <div class="col-md-6 col-lg-4 project-item" data-category="office">
-                <div class="project-card fade-in">
+            <div class="col-md-6 col-lg-4 project-item" data-category="office" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-card hover-float shadow">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1577412647305-991150c7d163?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Proyecto Corporativo">
+                        <img src="https://images.unsplash.com/photo-1577412647305-991150c7d163?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1170&amp;q=80" alt="Proyecto Corporativo" class="img-fluid">
                         <div class="project-overlay">
-                            <a href="#" class="btn">Ver Detalles</a>
+                            <a href="#" class="btn btn-primary">Ver Detalles</a>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <span class="project-category">Oficinas</span>
-                        <h3>Sede Corporativa Global Bank</h3>
-                        <p>Construcción de 30 oficinas privadas y 5 salas de conferencias con aislamiento acústico.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="testimonials-section">
-    <div class="container">
-        <h2 class="text-center">Lo Que Dicen Nuestros Clientes</h2>
-        <div class="row mt-5">
-            <div class="col-md-4 mb-4">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p class="quote">"El trabajo realizado por DrywallPro superó todas nuestras expectativas. Profesionales, puntuales y con gran atención al detalle."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="María González">
-                        <div>
-                            <h4>María González</h4>
-                            <p>Propietaria de Apartamento</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p class="quote">"Contratamos a DrywallPro para la remodelación de nuestras oficinas y el resultado fue excelente. Cumplieron con los plazos y el presupuesto."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Ricardo Torres">
-                        <div>
-                            <h4>Ricardo Torres</h4>
-                            <p>Gerente de Operaciones</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p class="quote">"La calidad de los materiales y el acabado fue perfecta. Sin duda, volveríamos a contratar sus servicios para futuros proyectos."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1601412436009-d964bd02edbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80" alt="Ana Martínez">
-                        <div>
-                            <h4>Ana Martínez</h4>
-                            <p>Arquitecta</p>
+                    <div class="project-content p-4">
+                        <span class="project-category badge bg-info mb-2">Oficinas</span>
+                        <h3 class="h4 mb-3">Sede Corporativa Global Bank</h3>
+                        <p class="text-muted">Construcción de 30 oficinas privadas y 5 salas de conferencias con aislamiento acústico.</p>
+                        <div class="project-meta mt-3 d-flex justify-content-between">
+                            <span><i class="fas fa-calendar-alt me-2"></i>Julio 2023</span>
+                            <span><i class="fas fa-map-marker-alt me-2"></i>Lima</span>
                         </div>
                     </div>
                 </div>
@@ -170,44 +157,50 @@
     </div>
 </section>
 
-<section class="cta-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <h2 class="animate__animated animate__fadeIn">¿Tienes un proyecto en mente?</h2>
-                <p class="animate__animated animate__fadeIn animate__delay-1s">Contáctanos hoy mismo para una cotización sin compromiso</p>
-            </div>
-            <div class="col-md-4 text-md-end">
-                <a href="/contacto" class="btn btn-light btn-lg animate__animated animate__fadeIn animate__delay-2s">Solicitar Cotización</a>
-            </div>
-        </div>
+<section class="cta-section py-5 bg-light">
+    <div class="container text-center" data-aos="fade-up">
+        <h2 class="mb-4">¿Tienes un proyecto en mente?</h2>
+        <p class="lead mb-4">Contáctanos para discutir cómo podemos ayudarte a hacerlo realidad.</p>
+        <a href="/contacto" class="btn btn-primary btn-lg pulse-animation">Solicitar Cotización</a>
     </div>
 </section>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Filtrado de proyectos
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectItems = document.querySelectorAll('.project-item');
-        
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const filter = this.getAttribute('data-filter');
-                
-                // Activar botón
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Filtrar proyectos
-                projectItems.forEach(item => {
-                    const category = item.getAttribute('data-category');
-                    if (filter === 'all' || filter === category) {
-                        item.style.display = 'block';
-                    } else {
+document.addEventListener('DOMContentLoaded', function() {
+    // Filtrado de proyectos
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-item');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remover clase activa de todos los botones
+            filterBtns.forEach(b => b.classList.remove('active'));
+            
+            // Agregar clase activa al botón actual
+            this.classList.add('active');
+            
+            // Obtener categoría del botón
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Filtrar proyectos
+            projectItems.forEach(item => {
+                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
                         item.style.display = 'none';
-                    }
-                });
+                    }, 300);
+                }
             });
         });
+    });
+});
+</script> 
     });
 </script> 

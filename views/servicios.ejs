@@ -1,89 +1,97 @@
-<section class="page-header">
-    <div class="container">
-        <h1>Nuestros Servicios</h1>
-        <p>Soluciones profesionales en instalación de drywall para todo tipo de proyectos</p>
+<%- contentFor('body') %>
+
+<section class="hero-small py-5 bg-dark text-white position-relative overflow-hidden">
+    <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold" data-aos="fade-up">Nuestros Servicios</h1>
+        <p class="lead" data-aos="fade-up" data-aos-delay="200">Soluciones profesionales en instalación de drywall para todo tipo de proyectos</p>
+        <div class="construction-element triangle" style="width: 120px; height: 120px; top: 20%; left: 5%;"></div>
+        <div class="construction-element circle" style="width: 80px; height: 80px; top: 70%; left: 15%;"></div>
+        <div class="construction-element square" style="width: 100px; height: 100px; top: 30%; right: 10%;"></div>
     </div>
 </section>
 
-<section class="services-main-section">
+<section class="services-intro py-5">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 mx-auto text-center mb-5">
+            <div class="col-lg-8 mx-auto text-center mb-5" data-aos="fade-up">
                 <p class="lead">En DrywallPro ofrecemos servicios completos de instalación, reparación y diseño de drywall para proyectos residenciales, comerciales y corporativos. Nuestro equipo de profesionales garantiza un trabajo de calidad con los mejores materiales del mercado.</p>
             </div>
         </div>
 
-        <h2>Servicios Especializados</h2>
+        <div class="section-title text-center mb-5" data-aos="fade-up">
+            <h2 class="display-5 fw-bold gradient-text">Servicios Especializados</h2>
+            <div class="title-separator mx-auto"></div>
+        </div>
         
-        <div class="row mt-5">
-            <div class="col-md-6 mb-4">
-                <div class="service-detail-card">
+        <div class="row g-4 mt-3">
+            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card hover-float shadow">
                     <div class="service-icon">
                         <i class="fas fa-home"></i>
                     </div>
-                    <div class="service-detail-content">
-                        <h3>Instalación de Drywall Residencial</h3>
-                        <p>Transformamos espacios residenciales con soluciones de drywall personalizadas, desde paredes divisorias hasta cielos rasos decorativos. Nos especializamos en:</p>
-                        <ul>
-                            <li>Construcción de paredes interiores</li>
-                            <li>Cielos rasos y techos decorativos</li>
-                            <li>Nichos y estanterías empotradas</li>
-                            <li>Revestimiento de paredes existentes</li>
-                            <li>Soluciones acústicas para habitaciones</li>
+                    <div class="service-content">
+                        <h3 class="service-title">Instalación de Drywall Residencial</h3>
+                        <p>Transformamos espacios residenciales con soluciones de drywall personalizadas, desde paredes divisorias hasta cielos rasos decorativos.</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Construcción de paredes interiores</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Cielos rasos y techos decorativos</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Nichos y estanterías empotradas</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Revestimiento de paredes existentes</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Soluciones acústicas para habitaciones</li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-4">
-                <div class="service-detail-card">
+            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-card hover-float shadow">
                     <div class="service-icon">
                         <i class="fas fa-building"></i>
                     </div>
-                    <div class="service-detail-content">
-                        <h3>Proyectos Comerciales</h3>
-                        <p>Desarrollamos proyectos para espacios comerciales, enfocándonos en funcionalidad, estética y cumplimiento de normativas. Nuestros servicios incluyen:</p>
-                        <ul>
-                            <li>Divisiones para locales comerciales</li>
-                            <li>Cielos rasos modular y de diseño</li>
-                            <li>Estructuras para vitrinas y exhibidores</li>
-                            <li>Aislamiento acústico para restaurantes</li>
-                            <li>Soluciones ignífugas y resistentes al fuego</li>
+                    <div class="service-content">
+                        <h3 class="service-title">Proyectos Comerciales</h3>
+                        <p>Desarrollamos proyectos para espacios comerciales, enfocándonos en funcionalidad, estética y cumplimiento de normativas.</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Divisiones para locales comerciales</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Cielos rasos modular y de diseño</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Estructuras para vitrinas y exhibidores</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Aislamiento acústico para restaurantes</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Soluciones ignífugas y resistentes al fuego</li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-4">
-                <div class="service-detail-card">
+            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-card hover-float shadow">
                     <div class="service-icon">
                         <i class="fas fa-toolbox"></i>
                     </div>
-                    <div class="service-detail-content">
-                        <h3>Reparación y Mantenimiento</h3>
-                        <p>Ofrecemos servicios de reparación y mantenimiento de estructuras de drywall existentes, extendiendo su vida útil y mejorando su apariencia:</p>
-                        <ul>
-                            <li>Reparación de grietas y daños</li>
-                            <li>Refuerzo de estructuras debilitadas</li>
-                            <li>Remodelación de instalaciones antiguas</li>
-                            <li>Revestimiento de superficies deterioradas</li>
-                            <li>Mantenimiento preventivo</li>
+                    <div class="service-content">
+                        <h3 class="service-title">Reparación y Mantenimiento</h3>
+                        <p>Ofrecemos servicios de reparación y mantenimiento de estructuras de drywall existentes, extendiendo su vida útil y mejorando su apariencia.</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Reparación de grietas y daños</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Refuerzo de estructuras debilitadas</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Remodelación de instalaciones antiguas</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Revestimiento de superficies deterioradas</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Mantenimiento preventivo</li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-4">
-                <div class="service-detail-card">
+            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-card hover-float shadow">
                     <div class="service-icon">
                         <i class="fas fa-pencil-ruler"></i>
                     </div>
-                    <div class="service-detail-content">
-                        <h3>Diseño Personalizado</h3>
-                        <p>Creamos soluciones personalizadas según las necesidades específicas de cada cliente, enfocándonos en estética y funcionalidad:</p>
-                        <ul>
-                            <li>Diseño de techos decorativos</li>
-                            <li>Creación de estructuras arquitectónicas</li>
-                            <li>Soluciones de iluminación integrada</li>
-                            <li>Muebles de drywall a medida</li>
-                            <li>Asesoramiento en diseño de interiores</li>
+                    <div class="service-content">
+                        <h3 class="service-title">Diseño Personalizado</h3>
+                        <p>Creamos soluciones personalizadas según las necesidades específicas de cada cliente, enfocándonos en estética y funcionalidad.</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Diseño de techos decorativos</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Creación de estructuras arquitectónicas</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Soluciones de iluminación integrada</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Muebles de drywall a medida</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i>Asesoramiento en diseño de interiores</li>
                         </ul>
                     </div>
                 </div>
@@ -92,35 +100,46 @@
     </div>
 </section>
 
-<section class="process-section">
-    <div class="container">
-        <h2 class="text-center">Nuestro Proceso de Trabajo</h2>
+<section class="process-section py-5 bg-light">
+    <div class="container" data-aos="fade-up">
+        <div class="section-title text-center mb-5">
+            <h2 class="display-5 fw-bold">Nuestro Proceso de Trabajo</h2>
+            <div class="title-separator mx-auto"></div>
+        </div>
         <div class="row mt-5">
-            <div class="col-md-3 mb-4">
-                <div class="process-step">
-                    <div class="process-number">1</div>
-                    <h3>Consulta Inicial</h3>
+            <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="process-card text-center">
+                    <div class="process-icon">
+                        <span class="process-number">1</span>
+                    </div>
+                    <h3 class="mt-4 mb-3">Consulta Inicial</h3>
                     <p>Evaluamos tus necesidades, espacio y expectativas para desarrollar una propuesta adecuada.</p>
                 </div>
             </div>
-            <div class="col-md-3 mb-4">
-                <div class="process-step">
-                    <div class="process-number">2</div>
-                    <h3>Diseño y Planificación</h3>
+            <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="process-card text-center">
+                    <div class="process-icon">
+                        <span class="process-number">2</span>
+                    </div>
+                    <h3 class="mt-4 mb-3">Diseño y Planificación</h3>
                     <p>Creamos un diseño detallado y un plan de trabajo con cronograma y presupuesto.</p>
                 </div>
             </div>
-            <div class="col-md-3 mb-4">
-                <div class="process-step">
-                    <div class="process-number">3</div>
-                    <h3>Instalación</h3>
+            <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="process-card text-center">
+                    <div class="process-icon">
+                        <span class="process-number">3</span>
+                    </div>
+                    <h3 class="mt-4 mb-3">Instalación</h3>
                     <p>Nuestro equipo profesional realiza la instalación siguiendo los más altos estándares de calidad.</p>
                 </div>
             </div>
-            <div class="col-md-3 mb-4">
-                <div class="process-step">
-                    <div class="process-number">4</div>
-                    <h3>Control de Calidad</h3>
+            <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="process-card text-center">
+                    <div class="process-icon">
+                        <span class="process-number">4</span>
+                    </div>
+                    <h3 class="mt-4 mb-3">Control de Calidad</h3>
                     <p>Verificamos cada detalle para garantizar un resultado perfecto y la satisfacción del cliente.</p>
                 </div>
             </div>
@@ -128,41 +147,51 @@
     </div>
 </section>
 
-<section class="materials-section">
+<section class="materials-section py-5">
     <div class="container">
-        <h2 class="mb-5">Materiales de Calidad</h2>
+        <div class="section-title text-center mb-5" data-aos="fade-up">
+            <h2 class="display-5 fw-bold">Materiales de Calidad</h2>
+            <div class="title-separator mx-auto"></div>
+        </div>
+        
         <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="about-image fade-in">
-                    <img src="https://images.unsplash.com/photo-1584647830800-d38754b31386?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Materiales de Calidad" class="img-fluid">
+            <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                <div class="materials-image">
+                    <img src="https://images.unsplash.com/photo-1584647830800-d38754b31386?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1170&amp;q=80" alt="Materiales de Calidad" class="img-fluid rounded shadow-lg">
                 </div>
             </div>
-            <div class="col-lg-6">
-                <h3 class="mb-4">Trabajamos con los Mejores Materiales</h3>
-                <p>En DrywallPro nos comprometemos a utilizar solo materiales de la más alta calidad para garantizar durabilidad y excelentes acabados en todos nuestros proyectos:</p>
-                <ul class="materials-list">
-                    <li><i class="fas fa-check"></i> Placas de yeso certificadas resistentes a la humedad</li>
-                    <li><i class="fas fa-check"></i> Perfiles de acero galvanizado de alta resistencia</li>
-                    <li><i class="fas fa-check"></i> Materiales de aislamiento acústico y térmico</li>
-                    <li><i class="fas fa-check"></i> Acabados de primera calidad para un resultado perfecto</li>
-                    <li><i class="fas fa-check"></i> Materiales ignífugos para mayor seguridad</li>
-                </ul>
-                <p>Todos nuestros materiales cumplen con los estándares internacionales y normativas de construcción vigentes.</p>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="materials-content ps-lg-4">
+                    <h3 class="mb-4 fw-bold">Trabajamos con los Mejores Materiales</h3>
+                    <p>En DrywallPro nos comprometemos a utilizar solo materiales de la más alta calidad para garantizar durabilidad y excelentes acabados en todos nuestros proyectos:</p>
+                    <ul class="materials-list">
+                        <li><i class="fas fa-check-circle text-primary me-2"></i>Placas de yeso certificadas resistentes a la humedad</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i>Perfiles de acero galvanizado de alta resistencia</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i>Materiales de aislamiento acústico y térmico</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i>Acabados de primera calidad para un resultado perfecto</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i>Materiales ignífugos para mayor seguridad</li>
+                    </ul>
+                    <p class="fst-italic">Todos nuestros materiales cumplen con los estándares internacionales y normativas de construcción vigentes.</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="faq-section">
-    <div class="container">
-        <h2 class="text-center">Preguntas Frecuentes</h2>
+<section class="faq-section py-5 bg-light">
+    <div class="container" data-aos="fade-up">
+        <div class="section-title text-center mb-5">
+            <h2 class="display-5 fw-bold">Preguntas Frecuentes</h2>
+            <div class="title-separator mx-auto"></div>
+        </div>
+        
         <div class="row mt-5">
             <div class="col-lg-8 mx-auto">
-                <div class="accordion" id="faqAccordion">
-                    <div class="accordion-item">
+                <div class="accordion custom-accordion" id="faqAccordion">
+                    <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                ¿Cuánto tiempo toma un proyecto de instalación de drywall?
+                                <i class="fas fa-question-circle me-2"></i> ¿Cuánto tiempo toma un proyecto de instalación de drywall?
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
@@ -171,10 +200,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
+                    <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
                         <h2 class="accordion-header" id="headingTwo">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                ¿Qué ventajas tiene el drywall frente a la construcción tradicional?
+                                <i class="fas fa-question-circle me-2"></i> ¿Qué ventajas tiene el drywall frente a la construcción tradicional?
                             </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
@@ -183,10 +212,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
+                    <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
                         <h2 class="accordion-header" id="headingThree">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                ¿Ofrecen garantía por los trabajos realizados?
+                                <i class="fas fa-question-circle me-2"></i> ¿Ofrecen garantía por los trabajos realizados?
                             </button>
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
@@ -195,10 +224,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
+                    <div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
                         <h2 class="accordion-header" id="headingFour">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                ¿Realizan trabajos en provincias o solo en la capital?
+                                <i class="fas fa-question-circle me-2"></i> ¿Realizan trabajos en provincias o solo en la capital?
                             </button>
                         </h2>
                         <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
@@ -213,16 +242,12 @@
     </div>
 </section>
 
-<section class="cta-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <h2 class="animate__animated animate__fadeIn">Solicita una Cotización Sin Compromiso</h2>
-                <p class="animate__animated animate__fadeIn animate__delay-1s">Nuestro equipo está listo para asesorarte en tu próximo proyecto</p>
-            </div>
-            <div class="col-md-4 text-md-end">
-                <a href="/contacto" class="btn btn-light btn-lg animate__animated animate__fadeIn animate__delay-2s">Contactar Ahora</a>
-            </div>
+<section class="cta-section py-5 text-white">
+    <div class="container" data-aos="fade-up">
+        <div class="cta-content text-center py-5">
+            <h2 class="display-5 mb-4 fw-bold">¿Listo para tu proyecto de drywall?</h2>
+            <p class="lead mb-4">Nuestro equipo está preparado para ayudarte a hacer realidad tu visión</p>
+            <a href="/contacto" class="btn btn-light btn-lg hover-glow"><i class="fas fa-paper-plane me-2"></i>Solicitar Cotización Gratis</a>
         </div>
     </div>
 </section> 

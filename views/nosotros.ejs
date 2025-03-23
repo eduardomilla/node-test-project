@@ -1,111 +1,157 @@
-<section class="page-header">
-    <div class="container">
-        <h1>Sobre Nosotros</h1>
-        <p>Conoce más acerca de DrywallPro y nuestra historia</p>
+<%- contentFor('body') %>
+
+<section class="hero-small py-5 bg-dark text-white position-relative overflow-hidden">
+    <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold" data-aos="fade-up">Sobre Nosotros</h1>
+        <p class="lead" data-aos="fade-up" data-aos-delay="200">Conoce más acerca de DrywallPro y nuestra historia</p>
+        <div class="construction-element triangle" style="width: 120px; height: 120px; top: 20%; left: 5%;"></div>
+        <div class="construction-element circle" style="width: 80px; height: 80px; top: 70%; left: 15%;"></div>
+        <div class="construction-element square" style="width: 100px; height: 100px; top: 30%; right: 10%;"></div>
     </div>
 </section>
 
-<section class="about-section">
+<section class="about-intro py-5">
     <div class="container">
         <div class="row align-items-center mb-5">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="about-image fade-in">
-                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nuestro Equipo" class="img-fluid">
+            <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                <div class="about-image position-relative">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80" alt="Nuestro Equipo" class="img-fluid rounded shadow-lg">
+                    <div class="construction-element triangle" style="width: 50px; height: 50px; top: -20px; left: -20px; opacity: 0.6;"></div>
+                    <div class="construction-element square" style="width: 40px; height: 40px; bottom: -15px; right: -15px; opacity: 0.6;"></div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="about-content">
-                    <h2>Nuestra Historia</h2>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="about-content ps-lg-4">
+                    <div class="section-title mb-4">
+                        <h2 class="display-5 fw-bold gradient-text">Nuestra Historia</h2>
+                        <div class="title-separator"></div>
+                    </div>
                     <p class="lead mb-4">Con más de 10 años de experiencia, DrywallPro se ha convertido en un referente de calidad en el mercado de instalación de drywall.</p>
                     <p>Fundada en 2014, nuestra empresa comenzó como un pequeño negocio familiar con la visión de ofrecer servicios de alta calidad para la construcción de interiores. A lo largo de los años, hemos crecido gracias al compromiso con nuestros clientes y la excelencia en cada proyecto que realizamos.</p>
                     <p>Hoy contamos con un equipo de profesionales altamente capacitados y utilizamos los mejores materiales del mercado para garantizar resultados duraderos y estéticos.</p>
+                    
+                    <div class="mt-4 d-flex gap-3">
+                        <div class="d-flex align-items-center">
+                            <div class="value-icon me-2">
+                                <i class="fas fa-check-circle text-primary"></i>
+                            </div>
+                            <span>Más de 500 proyectos realizados</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="value-icon me-2">
+                                <i class="fas fa-check-circle text-primary"></i>
+                            </div>
+                            <span>100% clientes satisfechos</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="team-section">
-    <div class="container">
-        <h2 class="text-center">Nuestros Valores</h2>
-        <div class="row mt-5">
-            <div class="col-md-4 mb-4">
-                <div class="value-card">
-                    <i class="fas fa-gem fa-3x mb-3"></i>
-                    <h3>Calidad</h3>
-                    <p>Nos comprometemos a utilizar los mejores materiales y técnicas para ofrecer resultados superiores en cada proyecto.</p>
+<section class="values-section py-5 bg-light">
+    <div class="container" data-aos="fade-up">
+        <div class="section-title text-center mb-5">
+            <h2 class="display-5 fw-bold">Nuestros Valores</h2>
+            <div class="title-separator mx-auto"></div>
+        </div>
+        
+        <div class="row g-4 mt-3">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="value-card text-center hover-float shadow h-100">
+                    <div class="value-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="value-title">Calidad</h3>
+                    <p>Nos comprometemos a utilizar los mejores materiales y técnicas para ofrecer resultados superiores en cada proyecto que emprendemos.</p>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="value-card">
-                    <i class="fas fa-handshake fa-3x mb-3"></i>
-                    <h3>Integridad</h3>
-                    <p>Trabajamos con honestidad y transparencia, cumpliendo siempre con lo prometido a nuestros clientes.</p>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="value-card text-center hover-float shadow h-100">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="value-title">Integridad</h3>
+                    <p>Trabajamos con honestidad y transparencia, cumpliendo siempre con lo prometido a nuestros clientes en todos nuestros compromisos.</p>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="value-card">
-                    <i class="fas fa-users fa-3x mb-3"></i>
-                    <h3>Servicio</h3>
-                    <p>Nos esforzamos por brindar una atención personalizada y responder a las necesidades específicas de cada cliente.</p>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="value-card text-center hover-float shadow h-100">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="value-title">Servicio</h3>
+                    <p>Nos esforzamos por brindar una atención personalizada y responder a las necesidades específicas de cada cliente con dedicación.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="about-section">
+<section class="team-section py-5">
     <div class="container">
-        <h2 class="text-center mb-5">Nuestro Equipo</h2>
+        <div class="section-title text-center mb-5" data-aos="fade-up">
+            <h2 class="display-5 fw-bold">Nuestro Equipo</h2>
+            <div class="title-separator mx-auto"></div>
+            <p class="lead mt-3">Profesionales comprometidos con la excelencia</p>
+        </div>
+        
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="team-card">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="team-card hover-float shadow">
                     <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Director General">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=774&amp;q=80" alt="Director General" class="img-fluid">
+                        <div class="team-overlay">
+                            <div class="team-social">
+                                <a href="#" class="team-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="team-social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="team-social-icon"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="team-info">
                         <h3>Carlos Rodríguez</h3>
-                        <p>Director General</p>
-                        <p>Con más de 15 años de experiencia en el sector, Carlos lidera nuestra empresa con visión y profesionalismo.</p>
-                    </div>
-                    <div class="team-social">
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <p class="team-position">Director General</p>
+                        <p class="team-desc">Con más de 15 años de experiencia en el sector, Carlos lidera nuestra empresa con visión y profesionalismo.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="team-card">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="team-card hover-float shadow">
                     <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Jefa de Proyectos">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=774&amp;q=80" alt="Jefa de Proyectos" class="img-fluid">
+                        <div class="team-overlay">
+                            <div class="team-social">
+                                <a href="#" class="team-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="team-social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="team-social-icon"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="team-info">
                         <h3>Laura Mendoza</h3>
-                        <p>Jefa de Proyectos</p>
-                        <p>Especialista en diseño de interiores y gestión eficiente de proyectos de gran envergadura.</p>
-                    </div>
-                    <div class="team-social">
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <p class="team-position">Jefa de Proyectos</p>
+                        <p class="team-desc">Especialista en diseño de interiores y gestión eficiente de proyectos de gran envergadura.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="team-card">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="team-card hover-float shadow">
                     <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Técnico Senior">
+                        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=774&amp;q=80" alt="Técnico Senior" class="img-fluid">
+                        <div class="team-overlay">
+                            <div class="team-social">
+                                <a href="#" class="team-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="team-social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="team-social-icon"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="team-info">
                         <h3>Miguel Sánchez</h3>
-                        <p>Técnico Senior</p>
-                        <p>Experto en instalación de drywall con certificaciones internacionales y atención al detalle.</p>
-                    </div>
-                    <div class="team-social">
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <p class="team-position">Técnico Senior</p>
+                        <p class="team-desc">Experto en instalación de drywall con certificaciones internacionales y atención al detalle.</p>
                     </div>
                 </div>
             </div>
@@ -113,16 +159,43 @@
     </div>
 </section>
 
-<section class="cta-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <h2 class="animate__animated animate__fadeIn">¿Listo para trabajar con nosotros?</h2>
-                <p class="animate__animated animate__fadeIn animate__delay-1s">Contáctanos hoy mismo para comenzar a planificar tu proyecto</p>
+<section class="stats-section py-5 bg-dark text-white">
+    <div class="container" data-aos="fade-up">
+        <div class="row text-center">
+            <div class="col-md-3 col-6 mb-4 mb-md-0" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-item">
+                    <div class="stat-number gradient-text">10+</div>
+                    <div class="stat-title">Años de Experiencia</div>
+                </div>
             </div>
-            <div class="col-md-4 text-md-end">
-                <a href="/contacto" class="btn btn-light btn-lg animate__animated animate__fadeIn animate__delay-2s">Contactar Ahora</a>
+            <div class="col-md-3 col-6 mb-4 mb-md-0" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-item">
+                    <div class="stat-number gradient-text">500+</div>
+                    <div class="stat-title">Proyectos Completados</div>
+                </div>
             </div>
+            <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-item">
+                    <div class="stat-number gradient-text">30+</div>
+                    <div class="stat-title">Profesionales</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-item">
+                    <div class="stat-number gradient-text">98%</div>
+                    <div class="stat-title">Clientes Satisfechos</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section py-5 text-white">
+    <div class="container" data-aos="fade-up">
+        <div class="cta-content text-center py-5">
+            <h2 class="display-5 mb-4 fw-bold">¿Listo para trabajar con nosotros?</h2>
+            <p class="lead mb-4">Contáctanos hoy mismo para comenzar a planificar tu proyecto</p>
+            <a href="/contacto" class="btn btn-light btn-lg hover-glow"><i class="fas fa-paper-plane me-2"></i>Contactar Ahora</a>
         </div>
     </div>
 </section> 
