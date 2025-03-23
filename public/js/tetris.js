@@ -1,5 +1,6 @@
 // Tetris Game by DrywallPro
 document.addEventListener('DOMContentLoaded', () => {
+    // Obtener elementos del DOM
     const canvas = document.getElementById('tetris');
     const nextPieceCanvas = document.getElementById('nextPiece');
     const ctx = canvas.getContext('2d');
@@ -38,26 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Gradientes para los colores de las piezas
     const gradients = [];
-    for (let i = 1; i < colors.length; i++) {
-        const gradient = ctx.createLinearGradient(0, 0, scale, scale);
-        gradient.addColorStop(0, colors[i]);
-        gradient.addColorStop(1, shadeColor(colors[i], -30));
-        gradients[i] = gradient;
-    }
-
-    // Matriz para el tablero
-    const board = createMatrix(boardWidth, boardHeight);
-    
-    // Variables de la pieza actual y siguiente
-    const player = {
-        pos: {x: 0, y: 0},
-        matrix: null,
-        score: 0,
-        next: null
-    };
-    
-    // Inicializar la primera pieza
-    playerReset();
     
     // Función para oscurecer/aclarar colores
     function shadeColor(color, percent) {
@@ -79,6 +60,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return "#" + RR + GG + BB;
     }
+    
+    // Inicializar gradientes
+    function initGradients() {
+        for (let i = 1; i < colors.length; i++) {
+            const gradient = ctx.createLinearGradient(0, 0, scale, scale);
+            gradient.addColorStop(0, colors[i]);
+            gradient.addColorStop(1, shadeColor(colors[i], -30));
+            gradients[i] = gradient;
+        }
+    }
+    
+    // Matriz para el tablero
+    const board = createMatrix(boardWidth, boardHeight);
+    
+    // Variables de la pieza actual y siguiente
+    const player = {
+        pos: {x: 0, y: 0},
+        matrix: null,
+        score: 0,
+        next: null
+    };
     
     // Crear matriz vacía para el tablero
     function createMatrix(w, h) {
@@ -142,7 +144,14 @@ document.addEventListener('DOMContentLoaded', () => {
         matrix.forEach((row, y) => {
             row.forEach((value, x) => {
                 if (value !== 0) {
-                    context.fillStyle = isGhost ? 'rgba(255, 255, 255, 0.2)' : gradients[value];
+                    if (isGhost) {
+                        context.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                    } else if (gradients[value]) {
+                        context.fillStyle = gradients[value];
+                    } else {
+                        context.fillStyle = colors[value];
+                    }
+                    
                     context.strokeStyle = '#000';
                     context.lineWidth = 1;
                     
@@ -179,6 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Dibujar la pieza fantasma que muestra dónde caerá la pieza
     function drawGhostPiece() {
+        if (!player.matrix) return;
+        
         const ghostPosition = {x: player.pos.x, y: player.pos.y};
         
         // Encontrar la posición más baja posible
@@ -225,7 +236,9 @@ document.addEventListener('DOMContentLoaded', () => {
         drawGhostPiece();
         
         // Dibujar la pieza actual
-        drawMatrix(player.matrix, player.pos, ctx);
+        if (player.matrix) {
+            drawMatrix(player.matrix, player.pos, ctx);
+        }
         
         // Dibujar la siguiente pieza
         drawNextPiece();
@@ -248,64 +261,14 @@ document.addEventListener('DOMContentLoaded', () => {
             drawMatrix(player.next, offset, nextPieceCtx);
         }
     }
-
-    // Mezclar el array de piezas
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
     
-    // Bolsa de piezas para generar secuencia aleatoria
-    let pieceBag = [];
-    
-    // Obtener la siguiente pieza
-    function getNextPiece() {
-        if (pieceBag.length === 0) {
-            pieceBag = ['T', 'O', 'L', 'J', 'I', 'S', 'Z'];
-            shuffleArray(pieceBag);
-        }
-        return pieceBag.pop();
-    }
-    
-    // Reiniciar la posición del jugador
-    function playerReset() {
-        const pieces = 'TOLJIZSZ';
-        
-        if (!player.next) {
-            player.next = createPiece(getNextPiece());
-        }
-        
-        player.matrix = player.next;
-        player.next = createPiece(getNextPiece());
-        
-        player.pos.y = 0;
-        player.pos.x = Math.floor(board[0].length / 2) - 
-                      Math.floor(player.matrix[0].length / 2);
-        
-        // Verificar si hay colisión inmediata (game over)
-        if (collide(board, player.matrix, player.pos)) {
-            gameOver = true;
-            paused = true;
-            updateGameMessage('¡Game Over!<br>Haz clic en Reiniciar para jugar de nuevo');
-        }
-    }
-    
-    // Actualizar el mensaje del juego
-    function updateGameMessage(message) {
-        gameMessage.innerHTML = `<p>${message}</p>`;
-        gameMessage.style.display = 'flex';
-    }
-    
-    // Verificar colisión
-    function collide(board, matrix, pos) {
+    // Verificar colisiones
+    function collide(arena, matrix, pos) {
         for (let y = 0; y < matrix.length; ++y) {
             for (let x = 0; x < matrix[y].length; ++x) {
                 if (matrix[y][x] !== 0 &&
-                   (board[y + pos.y] &&
-                    board[y + pos.y][x + pos.x]) !== 0) {
+                   (arena[y + pos.y] &&
+                    arena[y + pos.y][x + pos.x]) !== 0) {
                     return true;
                 }
             }
@@ -314,17 +277,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Fusionar la pieza con el tablero
-    function merge(board, player) {
+    function merge(arena, player) {
         player.matrix.forEach((row, y) => {
             row.forEach((value, x) => {
                 if (value !== 0) {
-                    board[y + player.pos.y][x + player.pos.x] = value;
+                    arena[y + player.pos.y][x + player.pos.x] = value;
                 }
             });
         });
     }
     
-    // Rotar la matriz (pieza)
+    // Mover la pieza
+    function playerMove(dir) {
+        player.pos.x += dir;
+        if (collide(board, player.matrix, player.pos)) {
+            player.pos.x -= dir;
+        }
+    }
+    
+    // Rotar la matriz de la pieza
     function rotate(matrix, dir) {
         for (let y = 0; y < matrix.length; ++y) {
             for (let x = 0; x < y; ++x) {
@@ -345,98 +316,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Animar la eliminación de líneas
-    function animateClearLines(rows) {
-        const animationFrames = 5;
-        let currentFrame = 0;
-        
-        function animate() {
-            if (currentFrame >= animationFrames) {
-                // Terminamos la animación, procedemos a eliminar las líneas
-                clearLines(rows);
-                return;
-            }
-            
-            // Dibujar el efecto
-            ctx.save();
-            
-            // Efecto de flash
-            const alpha = (currentFrame % 2 === 0) ? 0.8 : 0.2;
-            
-            rows.forEach(y => {
-                ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-                ctx.fillRect(0, y * scale, canvas.width, scale);
-            });
-            
-            ctx.restore();
-            
-            // Próximo frame
-            currentFrame++;
-            setTimeout(animate, 100);
-        }
-        
-        animate();
-    }
-    
-    // Limpiar líneas completadas
-    function checkLines() {
-        let linesCleared = 0;
-        let rowsToRemove = [];
-        
-        outer: for (let y = board.length - 1; y >= 0; --y) {
-            for (let x = 0; x < board[y].length; ++x) {
-                if (board[y][x] === 0) {
-                    continue outer;
-                }
-            }
-            
-            rowsToRemove.push(y);
-            linesCleared++;
-        }
-        
-        if (linesCleared > 0) {
-            // Animación
-            animateClearLines(rowsToRemove);
-            
-            // Actualizar puntuación
-            const linePoints = [40, 100, 300, 1200]; // Puntos por 1, 2, 3 o 4 líneas
-            score += linePoints[linesCleared - 1] * level;
-            lines += linesCleared;
-            
-            // Actualizar nivel (cada 10 líneas)
-            level = Math.floor(lines / 10) + 1;
-            
-            // Actualizar la velocidad de caída basada en el nivel
-            dropInterval = Math.max(100, 1000 - (level - 1) * 50);
-            
-            // Actualizar displays
-            updateScore();
-        }
-    }
-    
-    // Eliminar líneas completas
-    function clearLines(rows) {
-        rows.forEach(y => {
-            board.splice(y, 1);
-            board.unshift(new Array(boardWidth).fill(0));
-        });
-    }
-    
-    // Mover la pieza
-    function playerMove(dir) {
-        player.pos.x += dir;
-        if (collide(board, player.matrix, player.pos)) {
-            player.pos.x -= dir;
-        }
-    }
-    
-    // Rotar la pieza
+    // Rotar la pieza del jugador
     function playerRotate(dir) {
         const pos = player.pos.x;
         let offset = 1;
         rotate(player.matrix, dir);
         
-        // Verificar colisión después de rotar y ajustar si es necesario
         while (collide(board, player.matrix, player.pos)) {
             player.pos.x += offset;
             offset = -(offset + (offset > 0 ? 1 : -1));
@@ -448,93 +333,166 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Mover la pieza hacia abajo
+    // Caída de la pieza
     function playerDrop() {
         player.pos.y++;
         if (collide(board, player.matrix, player.pos)) {
             player.pos.y--;
             merge(board, player);
             playerReset();
-            checkLines();
+            arenaSweep();
+            updateScore();
         }
         dropCounter = 0;
     }
     
-    // Caída rápida
-    function playerHardDrop() {
+    // Dejar caer la pieza hasta el fondo
+    function playerDropToBottom() {
         while (!collide(board, player.matrix, {x: player.pos.x, y: player.pos.y + 1})) {
             player.pos.y++;
-            score += 1; // Puntos por caída rápida
         }
-        
         playerDrop();
-        updateScore();
     }
     
-    // Actualizar la puntuación en pantalla
+    // Reiniciar la pieza
+    function playerReset() {
+        const pieces = 'TILOJSZ';
+        
+        // Usar la siguiente pieza si ya está definida
+        if (player.next) {
+            player.matrix = player.next;
+        } else {
+            player.matrix = createPiece(pieces[Math.floor(Math.random() * pieces.length)]);
+        }
+        
+        // Generar la próxima pieza
+        player.next = createPiece(pieces[Math.floor(Math.random() * pieces.length)]);
+        
+        // Posición inicial
+        player.pos.y = 0;
+        player.pos.x = Math.floor((board[0].length - player.matrix[0].length) / 2);
+        
+        // Verificar game over
+        if (collide(board, player.matrix, player.pos)) {
+            gameOver = true;
+            paused = true;
+            gameMessage.style.display = 'flex';
+            gameMessage.innerHTML = '<p>Game Over<br>Presiona Reiniciar para jugar de nuevo</p>';
+            playButton.innerHTML = '<i class="fas fa-play me-2"></i>Jugar';
+        }
+    }
+    
+    // Eliminar líneas completas
+    function arenaSweep() {
+        let rowCount = 0;
+        outer: for (let y = board.length - 1; y >= 0; --y) {
+            for (let x = 0; x < board[y].length; ++x) {
+                if (board[y][x] === 0) {
+                    continue outer;
+                }
+            }
+            
+            // Eliminar la línea completa
+            const row = board.splice(y, 1)[0].fill(0);
+            board.unshift(row);
+            ++y; // Para no saltarse la fila que reemplaza
+            
+            rowCount++;
+            
+            // Animación para la línea completada
+            // Puedes agregar efectos más elaborados aquí
+        }
+        
+        // Actualizar líneas y niveles
+        if (rowCount > 0) {
+            lines += rowCount;
+            linesDisplay.textContent = lines;
+            linesDisplay.classList.add('score-update');
+            setTimeout(() => {
+                linesDisplay.classList.remove('score-update');
+            }, 300);
+            
+            // Actualizar nivel cada 10 líneas
+            const newLevel = Math.floor(lines / 10) + 1;
+            if (newLevel > level) {
+                level = newLevel;
+                levelDisplay.textContent = level;
+                levelDisplay.classList.add('score-update');
+                setTimeout(() => {
+                    levelDisplay.classList.remove('score-update');
+                }, 300);
+                
+                // Aumentar velocidad
+                dropInterval = 1000 - (level - 1) * 50;
+                if (dropInterval < 100) dropInterval = 100;
+            }
+            
+            // Puntuación por líneas completadas
+            // 1 línea = 100 * nivel
+            // 2 líneas = 300 * nivel
+            // 3 líneas = 500 * nivel
+            // 4 líneas = 800 * nivel (Tetris)
+            const linePoints = [0, 100, 300, 500, 800];
+            score += linePoints[rowCount] * level;
+            
+            updateScore();
+        }
+    }
+    
+    // Actualizar la puntuación
     function updateScore() {
         scoreDisplay.textContent = score;
-        linesDisplay.textContent = lines;
-        levelDisplay.textContent = level;
-        
-        // Añadir clase de animación
         scoreDisplay.classList.add('score-update');
-        
-        // Eliminar la clase después de la animación
         setTimeout(() => {
             scoreDisplay.classList.remove('score-update');
         }, 300);
     }
     
-    // Actualizar el juego
+    // Actualizar el estado del juego
     function update(time = 0) {
-        if (paused || gameOver) {
-            requestAnimationFrame(update);
-            return;
-        }
-        
         const deltaTime = time - lastTime;
         lastTime = time;
         
-        dropCounter += deltaTime;
-        if (dropCounter > dropInterval) {
-            playerDrop();
+        if (!paused && !gameOver) {
+            dropCounter += deltaTime;
+            if (dropCounter > dropInterval) {
+                playerDrop();
+            }
         }
         
         draw();
         requestAnimationFrame(update);
     }
     
-    // Iniciar o pausar el juego
-    function togglePause() {
-        if (gameOver) return;
+    // Iniciar el juego
+    function startGame() {
+        if (gameOver) {
+            // Reiniciar el juego
+            resetGame();
+        }
         
         paused = !paused;
         
         if (paused) {
-            updateGameMessage('Juego en Pausa<br>Presiona Jugar para continuar');
+            playButton.innerHTML = '<i class="fas fa-play me-2"></i>Jugar';
+            gameMessage.style.display = 'flex';
+            gameMessage.innerHTML = '<p>Juego pausado<br>Presiona Jugar para continuar</p>';
         } else {
+            playButton.innerHTML = '<i class="fas fa-pause me-2"></i>Pausar';
             gameMessage.style.display = 'none';
-            lastTime = performance.now();
-            update();
         }
-        
-        // Actualizar texto del botón
-        playButton.innerHTML = paused ? 
-            '<i class="fas fa-play me-2"></i>Jugar' : 
-            '<i class="fas fa-pause me-2"></i>Pausar';
     }
     
     // Reiniciar el juego
     function resetGame() {
-        // Limpiar el tablero
+        // Limpiar tablero
         for (let y = 0; y < board.length; y++) {
             for (let x = 0; x < board[y].length; x++) {
                 board[y][x] = 0;
             }
         }
         
-        // Reiniciar variables
+        // Reiniciar valores
         score = 0;
         lines = 0;
         level = 1;
@@ -543,118 +501,86 @@ document.addEventListener('DOMContentLoaded', () => {
         paused = true;
         
         // Actualizar displays
-        updateScore();
+        scoreDisplay.textContent = score;
+        linesDisplay.textContent = lines;
+        levelDisplay.textContent = level;
         
-        // Reiniciar pieza
+        // Crear nueva pieza
         playerReset();
         
-        // Mostrar mensaje
-        updateGameMessage('Presiona Jugar para comenzar');
-        
-        // Actualizar botón
+        // Mostrar mensaje inicial
+        gameMessage.style.display = 'flex';
+        gameMessage.innerHTML = '<p>Presiona Jugar para comenzar</p>';
         playButton.innerHTML = '<i class="fas fa-play me-2"></i>Jugar';
+    }
+    
+    // Controles del teclado
+    document.addEventListener('keydown', (event) => {
+        if (gameOver) return;
         
-        // Dibujar el tablero inicial
+        switch (event.key) {
+            case 'ArrowLeft':
+                if (!paused) playerMove(-1);
+                break;
+            case 'ArrowRight':
+                if (!paused) playerMove(1);
+                break;
+            case 'ArrowDown':
+                if (!paused) playerDrop();
+                break;
+            case 'ArrowUp':
+                if (!paused) playerRotate(1);
+                break;
+            case ' ':
+                if (!paused) playerDropToBottom();
+                break;
+            case 'p':
+            case 'P':
+                startGame();
+                break;
+        }
+    });
+    
+    // Controles de botones
+    playButton.addEventListener('click', startGame);
+    resetButton.addEventListener('click', resetGame);
+    
+    // Inicialización
+    initGradients();
+    resetGame();
+    update();
+
+    // Mostrar instrucciones con animación
+    setTimeout(() => {
+        const instructionsList = document.querySelector('.game-instructions ul');
+        if (instructionsList) {
+            instructionsList.classList.add('visible');
+        }
+    }, 500);
+    
+    // Ajustar tamaño del juego para responsive
+    function adjustGameSize() {
+        const container = document.querySelector('.tetris-container');
+        if (!container) return;
+        
+        if (window.innerWidth < 576) {
+            const containerWidth = container.offsetWidth - 40;
+            canvas.width = Math.min(240, containerWidth);
+            canvas.height = canvas.width * (400/240);
+            
+            // Recalcular escala y dimensiones
+            const newScale = canvas.width / boardWidth;
+            // No cambiamos la escala interna para evitar problemas con la lógica del juego
+        } else {
+            canvas.width = 240;
+            canvas.height = 400;
+        }
+        
+        // Reinicializar gradientes después de cambiar el tamaño
+        initGradients();
         draw();
     }
     
-    // Event listeners para controles
-    document.addEventListener('keydown', event => {
-        if (paused && !gameOver && event.keyCode === 80) { // P
-            togglePause();
-            return;
-        }
-        
-        if (paused || gameOver) return;
-        
-        switch(event.keyCode) {
-            case 37: // Izquierda
-                playerMove(-1);
-                break;
-            case 39: // Derecha
-                playerMove(1);
-                break;
-            case 40: // Abajo
-                playerDrop();
-                break;
-            case 38: // Arriba (Rotar)
-                playerRotate(1);
-                break;
-            case 32: // Espacio (Caída rápida)
-                playerHardDrop();
-                break;
-            case 80: // P (Pausar)
-                togglePause();
-                break;
-        }
-    });
-    
-    // Eventos de botones
-    playButton.addEventListener('click', togglePause);
-    resetButton.addEventListener('click', resetGame);
-    
-    // Eventos táctiles para dispositivos móviles
-    let touchStartX = null;
-    let touchStartY = null;
-    
-    canvas.addEventListener('touchstart', event => {
-        if (paused || gameOver) return;
-        touchStartX = event.touches[0].clientX;
-        touchStartY = event.touches[0].clientY;
-        event.preventDefault();
-    }, { passive: false });
-    
-    canvas.addEventListener('touchmove', event => {
-        if (paused || gameOver) return;
-        if (!touchStartX || !touchStartY) return;
-        
-        const touchX = event.touches[0].clientX;
-        const touchY = event.touches[0].clientY;
-        const diffX = touchX - touchStartX;
-        const diffY = touchY - touchStartY;
-        
-        // Detectar si el movimiento es horizontal o vertical
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-            // Movimiento horizontal
-            if (diffX > 10) { // Derecha
-                playerMove(1);
-                touchStartX = touchX;
-            } else if (diffX < -10) { // Izquierda
-                playerMove(-1);
-                touchStartX = touchX;
-            }
-        } else {
-            // Movimiento vertical
-            if (diffY > 10) { // Abajo
-                playerDrop();
-                touchStartY = touchY;
-            } else if (diffY < -10) { // Arriba (rotar)
-                playerRotate(1);
-                touchStartY = touchY;
-            }
-        }
-        
-        event.preventDefault();
-    }, { passive: false });
-    
-    canvas.addEventListener('touchend', event => {
-        touchStartX = null;
-        touchStartY = null;
-    });
-    
-    // Doble tap para caída rápida
-    let lastTap = 0;
-    canvas.addEventListener('touchend', event => {
-        const currentTime = new Date().getTime();
-        const tapLength = currentTime - lastTap;
-        if (tapLength < 300 && tapLength > 0) {
-            playerHardDrop();
-            event.preventDefault();
-        }
-        lastTap = currentTime;
-    });
-    
-    // Iniciar juego
-    resetGame();
-    draw();
+    window.addEventListener('resize', adjustGameSize);
+    adjustGameSize();
 }); 
