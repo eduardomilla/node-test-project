@@ -1,0 +1,64 @@
+<section class="page-header">
+    <div class="container">
+        <h1 class="animate__animated animate__fadeInDown">¡Juega Tetris!</h1>
+        <p class="animate__animated animate__fadeIn animate__delay-1s">Diviértete mientras esperas tu cotización de drywall</p>
+    </div>
+</section>
+
+<section class="contact-section">
+    <div class="container">
+        <div class="tetris-container" data-aos="fade-up">
+            <div class="game-wrapper">
+                <div class="game-info">
+                    <p>Puntuación: <span id="score">0</span></p>
+                </div>
+                
+                <canvas id="tetris" width="320" height="640" class="shadow-lg"></canvas>
+                
+                <div class="tetris-controls">
+                    <button class="control-btn scale-hover" id="left-btn">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button class="control-btn scale-hover" id="down-btn">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                    <button class="control-btn scale-hover" id="right-btn">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="control-btn scale-hover" id="rotate-btn">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+                
+                <div class="mobile-controls">
+                    <button class="control-btn" id="mobile-up-btn" style="grid-area: up;">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button class="control-btn" id="mobile-left-btn" style="grid-area: left;">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button class="control-btn" id="mobile-down-btn" style="grid-area: down;">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                    <button class="control-btn" id="mobile-right-btn" style="grid-area: right;">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="control-btn" id="mobile-rotate-btn" style="grid-area: rotate;">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="game-instructions" data-aos="fade-up" data-aos-delay="200">
+                <h3>¿Cómo jugar?</h3>
+                <ul>
+                    <li><i class="fas fa-arrow-left"></i> Mueve la pieza a la izquierda</li>
+                    <li><i class="fas fa-arrow-right"></i> Mueve la pieza a la derecha</li>
+                    <li><i class="fas fa-arrow-down"></i> Acelera la caída de la pieza</li>
+                    <li><i class="fas fa-redo"></i> Rota la pieza</li>
+                </ul>
+                <p class="mt-3">Completa líneas horizontales para ganar puntos. ¡Cuantas más líneas completes a la vez, más puntos ganarás!</p>
+            </div>
+        </div>
+    </div>
+</section> 
