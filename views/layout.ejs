@@ -18,11 +18,19 @@
                 <img src="https://cdn-icons-png.flaticon.com/512/6295/6295417.png" alt="DrywallPro Logo" class="me-2 animate__animated animate__pulse animate__infinite animate__slower" width="40" height="40">
                 <span class="ms-2">DrywallPro</span>
             </a>
+            <div class="d-none d-lg-flex siguenos-section ms-4">
+                <span>Síguenos</span>
+                <div class="siguenos-links">
+                    <a href="#" class="siguenos-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="siguenos-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="siguenos-icon"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link <%= currentPage === 'inicio' ? 'active' : '' %>" href="/">Inicio</a>
                     </li>
@@ -33,15 +41,47 @@
                         <a class="nav-link <%= currentPage === 'proyectos' ? 'active' : '' %>" href="/proyectos">Proyectos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <%= currentPage === 'tetris' ? 'active' : '' %>" href="/tetris">Tetris</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <%= currentPage === 'nosotros' ? 'active' : '' %>" href="/nosotros">Nosotros</a>
+                        <a class="nav-link <%= currentPage === 'acerca' ? 'active' : '' %>" href="/acerca">Acerca de</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <%= currentPage === 'contacto' ? 'active' : '' %>" href="/contacto">Contacto</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPage === 'tetris' ? 'active' : '' %>" href="/tetris">Tetris</a>
+                    </li>
                 </ul>
+                
+                <!-- Siguenos section for large screens -->
+                <div class="d-none d-lg-flex siguenos-section">
+                    <span>Síguenos</span>
+                    <div class="siguenos-links">
+                        <a href="https://facebook.com" class="siguenos-icon" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com" class="siguenos-icon" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/1234567890" class="siguenos-icon" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Siguenos section for mobile -->
+                <div class="d-lg-none mt-3 siguenos-section">
+                    <span>Síguenos</span>
+                    <div class="siguenos-links">
+                        <a href="https://facebook.com" class="siguenos-icon" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com" class="siguenos-icon" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/1234567890" class="siguenos-icon" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -50,22 +90,41 @@
         <%- body %>
     </main>
 
-    <footer class="footer bg-dark text-white py-4">
+    <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <h5 class="mb-3">DrywallPro</h5>
-                    <p>Tu mejor opción en instalación de drywall profesional</p>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>DrywallPro</h5>
+                    <p class="text-muted mb-3">Tu mejor opción en instalación de drywall profesional</p>
+                    <div class="footer-social-links">
+                        <a href="#" class="footer-social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <h5 class="mb-3">Síguenos</h5>
-                    <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-whatsapp fa-lg"></i></a>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/servicios">Servicios</a></li>
+                        <li><a href="/proyectos">Proyectos</a></li>
+                        <li><a href="/nosotros">Nosotros</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contáctanos</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Calle Principal #123, Ciudad</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +123 456 7890</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@drywallpro.com</li>
+                    </ul>
                 </div>
             </div>
-            <hr class="my-4">
-            <p class="text-center mb-0">&copy; 2024 DrywallPro. Todos los derechos reservados.</p>
+            <div class="copyright">
+                &copy; 2024 DrywallPro. Todos los derechos reservados.
+            </div>
         </div>
     </footer>
 
