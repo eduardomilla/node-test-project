@@ -10,45 +10,45 @@
 <section class="tetris-section">
     <div class="container">
         <div class="tetris-container" data-aos="fade-up">
-            <div class="row">
+            <div class="row g-4">
                 <div class="col-lg-8">
                     <div class="game-wrapper">
-                        <div class="game-info bg-dark text-white p-3 rounded mb-3">
+                        <div class="game-info mb-4">
                             <div class="row align-items-center">
                                 <div class="col-md-8">
-                                    <div class="d-flex justify-content-between">
+                                    <div class="d-flex justify-content-between mb-0">
                                         <div class="me-3"><strong>Puntuación:</strong> <span id="score" class="text-warning">0</span></div>
                                         <div class="me-3"><strong>Nivel:</strong> <span id="level" class="text-info">1</span></div>
                                         <div><strong>Líneas:</strong> <span id="lines" class="text-success">0</span></div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mt-2 mt-md-0 d-flex justify-content-end">
-                                    <button id="pause-play-btn" class="btn btn-primary me-2">
+                                <div class="col-md-4 mt-2 mt-md-0 d-flex justify-content-md-end justify-content-center">
+                                    <button id="pause-play-btn" class="btn btn-primary btn-lg me-2">
                                         <i class="fas fa-play"></i>
                                     </button>
-                                    <button id="restart-btn" class="btn btn-danger">
+                                    <button id="restart-btn" class="btn btn-danger btn-lg">
                                         <i class="fas fa-redo"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         
-                        <canvas id="tetris" class="shadow-lg rounded"></canvas>
+                        <canvas id="tetris" class="shadow-lg rounded mb-4"></canvas>
                         
-                        <div class="tetris-controls mt-4 d-flex justify-content-center flex-wrap">
-                            <button class="control-btn scale-hover me-3" id="left-btn" aria-label="Mover izquierda">
+                        <div class="tetris-controls">
+                            <button class="control-btn hover-scale me-2" id="left-btn" aria-label="Mover izquierda">
                                 <i class="fas fa-arrow-left"></i>
                             </button>
-                            <button class="control-btn scale-hover me-3" id="down-btn" aria-label="Mover abajo">
+                            <button class="control-btn hover-scale me-2" id="down-btn" aria-label="Mover abajo">
                                 <i class="fas fa-arrow-down"></i>
                             </button>
-                            <button class="control-btn scale-hover me-3" id="right-btn" aria-label="Mover derecha">
+                            <button class="control-btn hover-scale me-2" id="right-btn" aria-label="Mover derecha">
                                 <i class="fas fa-arrow-right"></i>
                             </button>
-                            <button class="control-btn scale-hover me-3" id="rotate-btn" aria-label="Rotar">
+                            <button class="control-btn hover-scale me-2" id="rotate-btn" aria-label="Rotar">
                                 <i class="fas fa-redo"></i>
                             </button>
-                            <button class="control-btn scale-hover" id="hard-drop-btn" aria-label="Caída rápida">
+                            <button class="control-btn hover-scale" id="hard-drop-btn" aria-label="Caída rápida">
                                 <i class="fas fa-angle-double-down"></i>
                             </button>
                         </div>
@@ -60,7 +60,7 @@
                         <div class="card-body">
                             <h3 class="card-title">¿Cómo jugar?</h3>
                             <p class="card-text">Usa las teclas de dirección o los botones para mover y rotar las piezas:</p>
-                            <ul class="list-group list-group-flush mb-3">
+                            <ul class="list-group list-group-flush mb-3 list-stagger">
                                 <li class="list-group-item"><i class="fas fa-arrow-left text-primary me-2"></i> Mueve la pieza a la izquierda</li>
                                 <li class="list-group-item"><i class="fas fa-arrow-right text-primary me-2"></i> Mueve la pieza a la derecha</li>
                                 <li class="list-group-item"><i class="fas fa-arrow-down text-primary me-2"></i> Acelera la caída de la pieza</li>
@@ -68,7 +68,7 @@
                                 <li class="list-group-item"><i class="fas fa-angle-double-down text-primary me-2"></i> Caída inmediata</li>
                                 <li class="list-group-item"><i class="fas fa-play text-primary me-2"></i> / <i class="fas fa-pause text-primary me-2"></i> Iniciar / Pausar juego</li>
                             </ul>
-                            <p class="card-text">El objetivo es completar líneas horizontales. Cuantas más líneas completes a la vez, más puntos ganarás.</p>
+                            <p class="card-text mb-0">El objetivo es completar líneas horizontales. Cuantas más líneas completes a la vez, más puntos ganarás.</p>
                             <div class="alert alert-primary mt-3" role="alert">
                                 <i class="fas fa-info-circle me-2"></i> El juego se ajusta automáticamente al tamaño de tu pantalla.
                             </div>
@@ -77,9 +77,9 @@
                     
                     <div class="card mt-4 shadow-sm bg-light">
                         <div class="card-body text-center">
-                            <h4 class="card-title">¿Disfrutando del juego?</h4>
+                            <h4 class="card-title gradient-text">¿Disfrutando del juego?</h4>
                             <p class="card-text">Cuando termines, no olvides contactarnos para tu proyecto de drywall.</p>
-                            <a href="/contacto" class="btn btn-primary mt-2">Solicitar Cotización</a>
+                            <a href="/contacto" class="btn btn-primary btn-lg mt-2 btn-pulse">Solicitar Cotización</a>
                         </div>
                     </div>
                 </div>
