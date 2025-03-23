@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/css/animations.css">
 </head>
 <body>
+    <div class="construction-bar"></div>
+    
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
@@ -34,7 +36,7 @@
                         <a class="nav-link <%= currentPage === 'proyectos' ? 'active' : '' %>" href="/proyectos">Proyectos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <%= currentPage === 'acerca' ? 'active' : '' %>" href="/acerca">Acerca de</a>
+                        <a class="nav-link <%= currentPage === 'nosotros' ? 'active' : '' %>" href="/nosotros">Nosotros</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <%= currentPage === 'contacto' ? 'active' : '' %>" href="/contacto">Contacto</a>
@@ -143,6 +145,29 @@
             document.querySelectorAll('.staggered-fade-in').forEach(el => {
                 observer.observe(el);
             });
+            
+            // Crear elementos de construcción aleatorios
+            for (let i = 0; i < 5; i++) {
+                const element = document.createElement('div');
+                element.classList.add('construction-element');
+                
+                // Tipo aleatorio
+                const type = Math.floor(Math.random() * 3);
+                if (type === 0) element.classList.add('triangle');
+                else if (type === 1) element.classList.add('circle');
+                else element.classList.add('square');
+                
+                // Posición aleatoria
+                element.style.top = Math.random() * 100 + 'vh';
+                element.style.left = Math.random() * 100 + 'vw';
+                
+                // Tamaño aleatorio
+                const size = 30 + Math.random() * 50;
+                element.style.width = size + 'px';
+                element.style.height = size + 'px';
+                
+                document.body.appendChild(element);
+            }
         });
     </script>
     <%- typeof scripts !== 'undefined' ? scripts : '' %>
