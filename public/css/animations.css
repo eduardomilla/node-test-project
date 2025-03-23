@@ -282,7 +282,7 @@
 /* Animación para listas */
 .list-stagger > * {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
 }
 
 .list-stagger > *:nth-child(1) { animation: listItemAppear 0.5s ease forwards 0.1s; }
@@ -294,7 +294,22 @@
 .list-stagger > *:nth-child(7) { animation: listItemAppear 0.5s ease forwards 0.7s; }
 .list-stagger > *:nth-child(8) { animation: listItemAppear 0.5s ease forwards 0.8s; }
 
+.staggered-fade-in > *.visible {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.staggered-fade-in > *:nth-child(1).visible { animation-delay: 0.1s; }
+.staggered-fade-in > *:nth-child(2).visible { animation-delay: 0.2s; }
+.staggered-fade-in > *:nth-child(3).visible { animation-delay: 0.3s; }
+.staggered-fade-in > *:nth-child(4).visible { animation-delay: 0.4s; }
+.staggered-fade-in > *:nth-child(5).visible { animation-delay: 0.5s; }
+.staggered-fade-in > *:nth-child(6).visible { animation-delay: 0.6s; }
+
 @keyframes listItemAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
     to {
         opacity: 1;
         transform: translateY(0);

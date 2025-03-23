@@ -112,34 +112,4 @@
             </div>
         </div>
     </div>
-</section>
-
-<% if (typeof scripts === 'undefined') { %>
-<script>
-    let scripts = '';
-</script>
-<% } %>
-
-<script>
-    // Include custom script for Tetris
-    scripts += '<script src="/js/tetris.js"></script>';
-    
-    // Control de responsive para el juego
-    document.addEventListener('DOMContentLoaded', function() {
-        const adjustGameSize = () => {
-            const container = document.querySelector('.tetris-container');
-            const canvas = document.getElementById('tetris');
-            
-            if (window.innerWidth < 576) {
-                canvas.width = Math.min(240, container.offsetWidth - 20);
-                canvas.height = canvas.width * (400/240);
-            } else {
-                canvas.width = 240;
-                canvas.height = 400;
-            }
-        };
-        
-        window.addEventListener('resize', adjustGameSize);
-        adjustGameSize();
-    });
-</script> 
+</section> 

@@ -21,20 +21,20 @@ document.addEventListener('DOMContentLoaded', function() {
             // Limpiar el formulario
             contactForm.reset();
         });
-    }
-    
-    // Validación en tiempo real
-    const inputs = contactForm.querySelectorAll('input, textarea, select');
-    inputs.forEach(input => {
-        input.addEventListener('invalid', function(e) {
-            e.preventDefault();
-            this.classList.add('is-invalid');
-        });
         
-        input.addEventListener('input', function() {
-            if (this.classList.contains('is-invalid')) {
-                this.classList.remove('is-invalid');
-            }
+        // Validación en tiempo real
+        const inputs = contactForm.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('invalid', function(e) {
+                e.preventDefault();
+                this.classList.add('is-invalid');
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.classList.contains('is-invalid')) {
+                    this.classList.remove('is-invalid');
+                }
+            });
         });
-    });
+    }
 }); 

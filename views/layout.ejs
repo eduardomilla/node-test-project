@@ -47,13 +47,13 @@
                 </ul>
                 
                 <div class="nav-social">
-                    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                    <a href="https://facebook.com/drywallpro" target="_blank" aria-label="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <a href="https://instagram.com/drywallpro" target="_blank" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://wa.me/1234567890" target="_blank" aria-label="WhatsApp">
+                    <a href="https://wa.me/51123456789" target="_blank" aria-label="WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
                 </div>
@@ -72,16 +72,16 @@
                     <h5>DrywallPro</h5>
                     <p class="mb-3">Tu mejor opción en instalación de drywall profesional</p>
                     <div class="footer-social-links">
-                        <a href="https://facebook.com" class="footer-social-icon hover-float" target="_blank" aria-label="Facebook">
+                        <a href="https://facebook.com/drywallpro" class="footer-social-icon hover-float" target="_blank" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://instagram.com" class="footer-social-icon hover-float" target="_blank" aria-label="Instagram">
+                        <a href="https://instagram.com/drywallpro" class="footer-social-icon hover-float" target="_blank" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://wa.me/1234567890" class="footer-social-icon hover-float" target="_blank" aria-label="WhatsApp">
+                        <a href="https://wa.me/51123456789" class="footer-social-icon hover-float" target="_blank" aria-label="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a href="https://linkedin.com" class="footer-social-icon hover-float" target="_blank" aria-label="LinkedIn">
+                        <a href="https://linkedin.com/company/drywallpro" class="footer-social-icon hover-float" target="_blank" aria-label="LinkedIn">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
@@ -137,7 +137,10 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                        const elements = entry.target.querySelectorAll('*');
+                        elements.forEach(el => {
+                            el.classList.add('visible');
+                        });
                     }
                 });
             }, { threshold: 0.1 });
