@@ -15,23 +15,15 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="/">
-                <img src="https://cdn-icons-png.flaticon.com/512/6295/6295417.png" alt="DrywallPro Logo" class="me-2 animate__animated animate__pulse animate__infinite animate__slower" width="40" height="40">
-                <span class="ms-2">DrywallPro</span>
+            <a class="navbar-brand" href="/">
+                <img src="https://cdn-icons-png.flaticon.com/512/6295/6295417.png" alt="DrywallPro Logo" class="me-2 pulse-animation" width="40" height="40">
+                <span>DrywallPro</span>
             </a>
-            <div class="d-none d-lg-flex siguenos-section ms-4">
-                <span>Síguenos</span>
-                <div class="siguenos-links">
-                    <a href="#" class="siguenos-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="siguenos-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="siguenos-icon"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
                         <a class="nav-link <%= currentPage === 'inicio' ? 'active' : '' %>" href="/">Inicio</a>
                     </li>
@@ -52,36 +44,16 @@
                     </li>
                 </ul>
                 
-                <!-- Siguenos section for large screens -->
-                <div class="d-none d-lg-flex siguenos-section">
-                    <span>Síguenos</span>
-                    <div class="siguenos-links">
-                        <a href="https://facebook.com" class="siguenos-icon" target="_blank">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://instagram.com" class="siguenos-icon" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://wa.me/1234567890" class="siguenos-icon" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Siguenos section for mobile -->
-                <div class="d-lg-none mt-3 siguenos-section">
-                    <span>Síguenos</span>
-                    <div class="siguenos-links">
-                        <a href="https://facebook.com" class="siguenos-icon" target="_blank">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://instagram.com" class="siguenos-icon" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://wa.me/1234567890" class="siguenos-icon" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
+                <div class="nav-social">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/1234567890" target="_blank" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -96,25 +68,25 @@
             <div class="row">
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5>DrywallPro</h5>
-                    <p class="text-muted mb-3">Tu mejor opción en instalación de drywall profesional</p>
+                    <p class="mb-3">Tu mejor opción en instalación de drywall profesional</p>
                     <div class="footer-social-links">
-                        <a href="https://facebook.com" class="footer-social-icon" target="_blank">
+                        <a href="https://facebook.com" class="footer-social-icon hover-float" target="_blank" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://instagram.com" class="footer-social-icon" target="_blank">
+                        <a href="https://instagram.com" class="footer-social-icon hover-float" target="_blank" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://wa.me/1234567890" class="footer-social-icon" target="_blank">
+                        <a href="https://wa.me/1234567890" class="footer-social-icon hover-float" target="_blank" aria-label="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a href="https://linkedin.com" class="footer-social-icon" target="_blank">
+                        <a href="https://linkedin.com" class="footer-social-icon hover-float" target="_blank" aria-label="LinkedIn">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5>Enlaces Rápidos</h5>
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled footer-links staggered-fade-in">
                         <li><a href="/">Inicio</a></li>
                         <li><a href="/servicios">Servicios</a></li>
                         <li><a href="/proyectos">Proyectos</a></li>
@@ -124,7 +96,7 @@
                 </div>
                 <div class="col-md-4">
                     <h5>Contáctanos</h5>
-                    <ul class="list-unstyled text-muted">
+                    <ul class="list-unstyled contact-info staggered-fade-in">
                         <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Calle Principal #123, Ciudad</li>
                         <li class="mb-2"><i class="fas fa-phone me-2"></i> +123 456 7890</li>
                         <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@drywallpro.com</li>
@@ -144,7 +116,8 @@
         AOS.init({
             duration: 800,
             easing: 'ease',
-            once: true
+            once: true,
+            disable: 'mobile' // Desactivar en dispositivos muy pequeños
         });
         
         // Navbar scroll effect
@@ -155,6 +128,21 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        // Activar animaciones staggered en el footer cuando sea visible
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.staggered-fade-in').forEach(el => {
+                observer.observe(el);
+            });
         });
     </script>
     <%- typeof scripts !== 'undefined' ? scripts : '' %>

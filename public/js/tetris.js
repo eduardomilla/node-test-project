@@ -1,665 +1,660 @@
 // Tetris Game by DrywallPro
 document.addEventListener('DOMContentLoaded', () => {
-    // Elementos del DOM
     const canvas = document.getElementById('tetris');
+    const nextPieceCanvas = document.getElementById('nextPiece');
     const ctx = canvas.getContext('2d');
-    const scoreElement = document.getElementById('score');
-    const levelElement = document.getElementById('level');
-    const linesElement = document.getElementById('lines');
-    const pausePlayBtn = document.getElementById('pause-play-btn');
-    const restartBtn = document.getElementById('restart-btn');
-    const leftBtn = document.getElementById('left-btn');
-    const rightBtn = document.getElementById('right-btn');
-    const downBtn = document.getElementById('down-btn');
-    const rotateBtn = document.getElementById('rotate-btn');
-    const hardDropBtn = document.getElementById('hard-drop-btn');
+    const nextPieceCtx = nextPieceCanvas.getContext('2d');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const levelDisplay = document.getElementById('levelDisplay');
+    const linesDisplay = document.getElementById('linesDisplay');
+    const gameMessage = document.getElementById('gameMessage');
+    const playButton = document.getElementById('playButton');
+    const resetButton = document.getElementById('resetButton');
     
-    // Configuración del juego
-    const COLS = 10;
-    const ROWS = 20;
-    const BLOCK_SIZE = 30;
-    const EMPTY_COLOR = '#111';
-    const BORDER_COLOR = '#333';
-    const BORDER_WIDTH = 2;
-    
-    // Colores de las piezas con gradientes
-    const COLORS = [
-        null,
-        createGradient('#FF416C', '#FF4B2B'), // I - Rojo
-        createGradient('#4776E6', '#8E54E9'), // J - Púrpura
-        createGradient('#56CCF2', '#2F80ED'), // L - Azul
-        createGradient('#38ef7d', '#11998e'), // O - Verde
-        createGradient('#FF8008', '#FFC837'), // S - Naranja
-        createGradient('#FC5C7D', '#6A82FB'), // T - Rosa
-        createGradient('#FFAFBD', '#ffc3a0')  // Z - Melocotón
-    ];
-    
-    // Crear gradientes para las piezas
-    function createGradient(color1, color2) {
-        return {
-            color1: color1,
-            color2: color2
-        };
-    }
-    
-    // Definiciones de las piezas (matrices)
-    const PIECES = [
-        [
-            [0, 0, 0, 0],
-            [1, 1, 1, 1],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]
-        ],
-        [
-            [2, 0, 0],
-            [2, 2, 2],
-            [0, 0, 0]
-        ],
-        [
-            [0, 0, 3],
-            [3, 3, 3],
-            [0, 0, 0]
-        ],
-        [
-            [4, 4],
-            [4, 4]
-        ],
-        [
-            [0, 5, 5],
-            [5, 5, 0],
-            [0, 0, 0]
-        ],
-        [
-            [0, 6, 0],
-            [6, 6, 6],
-            [0, 0, 0]
-        ],
-        [
-            [7, 7, 0],
-            [0, 7, 7],
-            [0, 0, 0]
-        ]
-    ];
-    
-    // Variables del juego
-    let board = createBoard();
-    let piece = null;
-    let nextPiece = null;
+    // Configuración
+    const scale = 20;
+    const boardWidth = canvas.width / scale;
+    const boardHeight = canvas.height / scale;
+    let dropInterval = 1000;
+    let lastTime = 0;
+    let dropCounter = 0;
+    let paused = true;
+    let gameOver = false;
     let score = 0;
     let lines = 0;
     let level = 1;
-    let dropCounter = 0;
-    let dropInterval = 1000; // Inicia con 1 segundo
-    let lastTime = 0;
-    let gameOver = false;
-    let paused = true;
-    let animatingLines = false;
-    let linesToRemove = [];
     
-    // Ajustar el tamaño del canvas para ser responsivo
-    function resizeCanvas() {
-        const gameWrapper = document.querySelector('.game-wrapper');
-        const maxWidth = gameWrapper.clientWidth - 40; // Restar el padding
-        const maxBlockSize = Math.floor(maxWidth / COLS);
-        
-        const newBlockSize = Math.min(BLOCK_SIZE, maxBlockSize);
-        canvas.width = newBlockSize * COLS;
-        canvas.height = newBlockSize * ROWS;
-        
-        // Actualizar el tamaño del bloque
-        return newBlockSize;
+    // Colores de las piezas
+    const colors = [
+        null,
+        '#FF0D72', // T - Rosa
+        '#0DC2FF', // I - Azul claro
+        '#0DFF72', // O - Verde claro
+        '#F538FF', // L - Magenta
+        '#FF8E0D', // J - Naranja
+        '#FFE138', // Z - Amarillo
+        '#3877FF'  // S - Azul
+    ];
+    
+    // Gradientes para los colores de las piezas
+    const gradients = [];
+    for (let i = 1; i < colors.length; i++) {
+        const gradient = ctx.createLinearGradient(0, 0, scale, scale);
+        gradient.addColorStop(0, colors[i]);
+        gradient.addColorStop(1, shadeColor(colors[i], -30));
+        gradients[i] = gradient;
+    }
+
+    // Matriz para el tablero
+    const board = createMatrix(boardWidth, boardHeight);
+    
+    // Variables de la pieza actual y siguiente
+    const player = {
+        pos: {x: 0, y: 0},
+        matrix: null,
+        score: 0,
+        next: null
+    };
+    
+    // Inicializar la primera pieza
+    playerReset();
+    
+    // Función para oscurecer/aclarar colores
+    function shadeColor(color, percent) {
+        let R = parseInt(color.substring(1, 3), 16);
+        let G = parseInt(color.substring(3, 5), 16);
+        let B = parseInt(color.substring(5, 7), 16);
+
+        R = parseInt(R * (100 + percent) / 100);
+        G = parseInt(G * (100 + percent) / 100);
+        B = parseInt(B * (100 + percent) / 100);
+
+        R = (R < 255) ? R : 255;
+        G = (G < 255) ? G : 255;
+        B = (B < 255) ? B : 255;
+
+        const RR = ((R.toString(16).length === 1) ? "0" + R.toString(16) : R.toString(16));
+        const GG = ((G.toString(16).length === 1) ? "0" + G.toString(16) : G.toString(16));
+        const BB = ((B.toString(16).length === 1) ? "0" + B.toString(16) : B.toString(16));
+
+        return "#" + RR + GG + BB;
     }
     
-    let currentBlockSize = resizeCanvas();
-    
-    // Crear tablero inicial (matriz)
-    function createBoard() {
-        return Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+    // Crear matriz vacía para el tablero
+    function createMatrix(w, h) {
+        const matrix = [];
+        while (h--) {
+            matrix.push(new Array(w).fill(0));
+        }
+        return matrix;
     }
     
-    // Inicializar el juego
-    function initGame() {
-        board = createBoard();
+    // Crear piezas de Tetris
+    function createPiece(type) {
+        switch(type) {
+            case 'T':
+                return [
+                    [0, 0, 0],
+                    [1, 1, 1],
+                    [0, 1, 0],
+                ];
+            case 'O':
+                return [
+                    [2, 2],
+                    [2, 2],
+                ];
+            case 'L':
+                return [
+                    [0, 3, 0],
+                    [0, 3, 0],
+                    [0, 3, 3],
+                ];
+            case 'J':
+                return [
+                    [0, 4, 0],
+                    [0, 4, 0],
+                    [4, 4, 0],
+                ];
+            case 'I':
+                return [
+                    [0, 0, 0, 0],
+                    [5, 5, 5, 5],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                ];
+            case 'S':
+                return [
+                    [0, 6, 6],
+                    [6, 6, 0],
+                    [0, 0, 0],
+                ];
+            case 'Z':
+                return [
+                    [7, 7, 0],
+                    [0, 7, 7],
+                    [0, 0, 0],
+                ];
+        }
+    }
+
+    // Dibujar la matriz (pieza o tablero)
+    function drawMatrix(matrix, offset, context, isGhost = false) {
+        matrix.forEach((row, y) => {
+            row.forEach((value, x) => {
+                if (value !== 0) {
+                    context.fillStyle = isGhost ? 'rgba(255, 255, 255, 0.2)' : gradients[value];
+                    context.strokeStyle = '#000';
+                    context.lineWidth = 1;
+                    
+                    // Dibujar el bloque con un efecto 3D
+                    context.fillRect(
+                        (x + offset.x) * scale,
+                        (y + offset.y) * scale,
+                        scale,
+                        scale
+                    );
+                    
+                    // Bordes para efecto 3D
+                    context.strokeRect(
+                        (x + offset.x) * scale,
+                        (y + offset.y) * scale,
+                        scale,
+                        scale
+                    );
+                    
+                    // Sombra interna (parte superior-izquierda más clara)
+                    if (!isGhost) {
+                        context.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                        context.fillRect(
+                            (x + offset.x) * scale,
+                            (y + offset.y) * scale,
+                            scale / 3,
+                            scale / 3
+                        );
+                    }
+                }
+            });
+        });
+    }
+    
+    // Dibujar la pieza fantasma que muestra dónde caerá la pieza
+    function drawGhostPiece() {
+        const ghostPosition = {x: player.pos.x, y: player.pos.y};
+        
+        // Encontrar la posición más baja posible
+        while (!collide(board, player.matrix, {x: ghostPosition.x, y: ghostPosition.y + 1})) {
+            ghostPosition.y++;
+        }
+        
+        // Solo dibujar si la pieza fantasma no está en la misma posición que la pieza actual
+        if (ghostPosition.y > player.pos.y) {
+            drawMatrix(player.matrix, ghostPosition, ctx, true);
+        }
+    }
+    
+    // Dibujar el tablero
+    function draw() {
+        // Limpiar canvas
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Dibujar cuadrícula
+        ctx.strokeStyle = '#222';
+        ctx.lineWidth = 0.5;
+        
+        // Líneas horizontales
+        for (let i = 0; i <= boardHeight; i++) {
+            ctx.beginPath();
+            ctx.moveTo(0, i * scale);
+            ctx.lineTo(canvas.width, i * scale);
+            ctx.stroke();
+        }
+        
+        // Líneas verticales
+        for (let i = 0; i <= boardWidth; i++) {
+            ctx.beginPath();
+            ctx.moveTo(i * scale, 0);
+            ctx.lineTo(i * scale, canvas.height);
+            ctx.stroke();
+        }
+        
+        // Dibujar el tablero
+        drawMatrix(board, {x: 0, y: 0}, ctx);
+        
+        // Dibujar la pieza fantasma
+        drawGhostPiece();
+        
+        // Dibujar la pieza actual
+        drawMatrix(player.matrix, player.pos, ctx);
+        
+        // Dibujar la siguiente pieza
+        drawNextPiece();
+    }
+    
+    // Dibujar la próxima pieza
+    function drawNextPiece() {
+        // Limpiar el canvas de la próxima pieza
+        nextPieceCtx.fillStyle = '#000';
+        nextPieceCtx.fillRect(0, 0, nextPieceCanvas.width, nextPieceCanvas.height);
+        
+        if (player.next) {
+            // Calcular el offset para centrar la pieza
+            const offset = {
+                x: (nextPieceCanvas.width / scale - player.next[0].length) / 2,
+                y: (nextPieceCanvas.height / scale - player.next.length) / 2
+            };
+            
+            // Dibujar la próxima pieza
+            drawMatrix(player.next, offset, nextPieceCtx);
+        }
+    }
+
+    // Mezclar el array de piezas
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    
+    // Bolsa de piezas para generar secuencia aleatoria
+    let pieceBag = [];
+    
+    // Obtener la siguiente pieza
+    function getNextPiece() {
+        if (pieceBag.length === 0) {
+            pieceBag = ['T', 'O', 'L', 'J', 'I', 'S', 'Z'];
+            shuffleArray(pieceBag);
+        }
+        return pieceBag.pop();
+    }
+    
+    // Reiniciar la posición del jugador
+    function playerReset() {
+        const pieces = 'TOLJIZSZ';
+        
+        if (!player.next) {
+            player.next = createPiece(getNextPiece());
+        }
+        
+        player.matrix = player.next;
+        player.next = createPiece(getNextPiece());
+        
+        player.pos.y = 0;
+        player.pos.x = Math.floor(board[0].length / 2) - 
+                      Math.floor(player.matrix[0].length / 2);
+        
+        // Verificar si hay colisión inmediata (game over)
+        if (collide(board, player.matrix, player.pos)) {
+            gameOver = true;
+            paused = true;
+            updateGameMessage('¡Game Over!<br>Haz clic en Reiniciar para jugar de nuevo');
+        }
+    }
+    
+    // Actualizar el mensaje del juego
+    function updateGameMessage(message) {
+        gameMessage.innerHTML = `<p>${message}</p>`;
+        gameMessage.style.display = 'flex';
+    }
+    
+    // Verificar colisión
+    function collide(board, matrix, pos) {
+        for (let y = 0; y < matrix.length; ++y) {
+            for (let x = 0; x < matrix[y].length; ++x) {
+                if (matrix[y][x] !== 0 &&
+                   (board[y + pos.y] &&
+                    board[y + pos.y][x + pos.x]) !== 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    // Fusionar la pieza con el tablero
+    function merge(board, player) {
+        player.matrix.forEach((row, y) => {
+            row.forEach((value, x) => {
+                if (value !== 0) {
+                    board[y + player.pos.y][x + player.pos.x] = value;
+                }
+            });
+        });
+    }
+    
+    // Rotar la matriz (pieza)
+    function rotate(matrix, dir) {
+        for (let y = 0; y < matrix.length; ++y) {
+            for (let x = 0; x < y; ++x) {
+                [
+                    matrix[x][y],
+                    matrix[y][x],
+                ] = [
+                    matrix[y][x],
+                    matrix[x][y],
+                ];
+            }
+        }
+        
+        if (dir > 0) {
+            matrix.forEach(row => row.reverse());
+        } else {
+            matrix.reverse();
+        }
+    }
+    
+    // Animar la eliminación de líneas
+    function animateClearLines(rows) {
+        const animationFrames = 5;
+        let currentFrame = 0;
+        
+        function animate() {
+            if (currentFrame >= animationFrames) {
+                // Terminamos la animación, procedemos a eliminar las líneas
+                clearLines(rows);
+                return;
+            }
+            
+            // Dibujar el efecto
+            ctx.save();
+            
+            // Efecto de flash
+            const alpha = (currentFrame % 2 === 0) ? 0.8 : 0.2;
+            
+            rows.forEach(y => {
+                ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+                ctx.fillRect(0, y * scale, canvas.width, scale);
+            });
+            
+            ctx.restore();
+            
+            // Próximo frame
+            currentFrame++;
+            setTimeout(animate, 100);
+        }
+        
+        animate();
+    }
+    
+    // Limpiar líneas completadas
+    function checkLines() {
+        let linesCleared = 0;
+        let rowsToRemove = [];
+        
+        outer: for (let y = board.length - 1; y >= 0; --y) {
+            for (let x = 0; x < board[y].length; ++x) {
+                if (board[y][x] === 0) {
+                    continue outer;
+                }
+            }
+            
+            rowsToRemove.push(y);
+            linesCleared++;
+        }
+        
+        if (linesCleared > 0) {
+            // Animación
+            animateClearLines(rowsToRemove);
+            
+            // Actualizar puntuación
+            const linePoints = [40, 100, 300, 1200]; // Puntos por 1, 2, 3 o 4 líneas
+            score += linePoints[linesCleared - 1] * level;
+            lines += linesCleared;
+            
+            // Actualizar nivel (cada 10 líneas)
+            level = Math.floor(lines / 10) + 1;
+            
+            // Actualizar la velocidad de caída basada en el nivel
+            dropInterval = Math.max(100, 1000 - (level - 1) * 50);
+            
+            // Actualizar displays
+            updateScore();
+        }
+    }
+    
+    // Eliminar líneas completas
+    function clearLines(rows) {
+        rows.forEach(y => {
+            board.splice(y, 1);
+            board.unshift(new Array(boardWidth).fill(0));
+        });
+    }
+    
+    // Mover la pieza
+    function playerMove(dir) {
+        player.pos.x += dir;
+        if (collide(board, player.matrix, player.pos)) {
+            player.pos.x -= dir;
+        }
+    }
+    
+    // Rotar la pieza
+    function playerRotate(dir) {
+        const pos = player.pos.x;
+        let offset = 1;
+        rotate(player.matrix, dir);
+        
+        // Verificar colisión después de rotar y ajustar si es necesario
+        while (collide(board, player.matrix, player.pos)) {
+            player.pos.x += offset;
+            offset = -(offset + (offset > 0 ? 1 : -1));
+            if (offset > player.matrix[0].length) {
+                rotate(player.matrix, -dir);
+                player.pos.x = pos;
+                return;
+            }
+        }
+    }
+    
+    // Mover la pieza hacia abajo
+    function playerDrop() {
+        player.pos.y++;
+        if (collide(board, player.matrix, player.pos)) {
+            player.pos.y--;
+            merge(board, player);
+            playerReset();
+            checkLines();
+        }
+        dropCounter = 0;
+    }
+    
+    // Caída rápida
+    function playerHardDrop() {
+        while (!collide(board, player.matrix, {x: player.pos.x, y: player.pos.y + 1})) {
+            player.pos.y++;
+            score += 1; // Puntos por caída rápida
+        }
+        
+        playerDrop();
+        updateScore();
+    }
+    
+    // Actualizar la puntuación en pantalla
+    function updateScore() {
+        scoreDisplay.textContent = score;
+        linesDisplay.textContent = lines;
+        levelDisplay.textContent = level;
+        
+        // Añadir clase de animación
+        scoreDisplay.classList.add('score-update');
+        
+        // Eliminar la clase después de la animación
+        setTimeout(() => {
+            scoreDisplay.classList.remove('score-update');
+        }, 300);
+    }
+    
+    // Actualizar el juego
+    function update(time = 0) {
+        if (paused || gameOver) {
+            requestAnimationFrame(update);
+            return;
+        }
+        
+        const deltaTime = time - lastTime;
+        lastTime = time;
+        
+        dropCounter += deltaTime;
+        if (dropCounter > dropInterval) {
+            playerDrop();
+        }
+        
+        draw();
+        requestAnimationFrame(update);
+    }
+    
+    // Iniciar o pausar el juego
+    function togglePause() {
+        if (gameOver) return;
+        
+        paused = !paused;
+        
+        if (paused) {
+            updateGameMessage('Juego en Pausa<br>Presiona Jugar para continuar');
+        } else {
+            gameMessage.style.display = 'none';
+            lastTime = performance.now();
+            update();
+        }
+        
+        // Actualizar texto del botón
+        playButton.innerHTML = paused ? 
+            '<i class="fas fa-play me-2"></i>Jugar' : 
+            '<i class="fas fa-pause me-2"></i>Pausar';
+    }
+    
+    // Reiniciar el juego
+    function resetGame() {
+        // Limpiar el tablero
+        for (let y = 0; y < board.length; y++) {
+            for (let x = 0; x < board[y].length; x++) {
+                board[y][x] = 0;
+            }
+        }
+        
+        // Reiniciar variables
         score = 0;
         lines = 0;
         level = 1;
         dropInterval = 1000;
         gameOver = false;
         paused = true;
+        
+        // Actualizar displays
         updateScore();
-        generatePiece();
         
-        // Actualizar el botón de pausa/play
-        updatePausePlayButton();
+        // Reiniciar pieza
+        playerReset();
         
-        // Iniciar la animación del juego
-        requestAnimationFrame(update);
+        // Mostrar mensaje
+        updateGameMessage('Presiona Jugar para comenzar');
+        
+        // Actualizar botón
+        playButton.innerHTML = '<i class="fas fa-play me-2"></i>Jugar';
+        
+        // Dibujar el tablero inicial
+        draw();
     }
     
-    // Actualizar visualmente la puntuación, nivel y líneas
-    function updateScore() {
-        scoreElement.textContent = score;
-        levelElement.textContent = level;
-        linesElement.textContent = lines;
-    }
-    
-    // Animar la puntuación cuando cambia
-    function animateScore() {
-        scoreElement.classList.add('score-flash');
-        setTimeout(() => {
-            scoreElement.classList.remove('score-flash');
-        }, 500);
-    }
-    
-    // Generar una nueva pieza
-    function generatePiece() {
-        if (nextPiece === null) {
-            const pieceIndex = Math.floor(Math.random() * PIECES.length);
-            nextPiece = {
-                matrix: PIECES[pieceIndex],
-                position: { x: Math.floor(COLS / 2) - Math.floor(PIECES[pieceIndex][0].length / 2), y: 0 }
-            };
-        }
-        
-        piece = nextPiece;
-        
-        // Generar la siguiente pieza
-        const pieceIndex = Math.floor(Math.random() * PIECES.length);
-        nextPiece = {
-            matrix: PIECES[pieceIndex],
-            position: { x: Math.floor(COLS / 2) - Math.floor(PIECES[pieceIndex][0].length / 2), y: 0 }
-        };
-        
-        // Comprobar si el juego ha terminado
-        if (collision(board, piece)) {
-            gameOver = true;
-            paused = true;
-            updatePausePlayButton();
-            
-            // Animar game over
-            animateGameOver();
-        }
-    }
-    
-    // Animación de Game Over
-    function animateGameOver() {
-        // Efecto visual de game over (hacer que el tablero parpadee)
-        let flashes = 0;
-        const flashInterval = setInterval(() => {
-            ctx.fillStyle = flashes % 2 === 0 ? 'rgba(255, 0, 0, 0.3)' : 'rgba(0, 0, 0, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            flashes++;
-            
-            if (flashes > 6) {
-                clearInterval(flashInterval);
-                drawBoard();
-                drawText("GAME OVER", canvas.width / 2, canvas.height / 2);
-                drawText("Presiona REINICIAR", canvas.width / 2, canvas.height / 2 + 40);
-            }
-        }, 200);
-    }
-    
-    // Dibujar texto centrado
-    function drawText(text, x, y) {
-        ctx.fillStyle = 'white';
-        ctx.font = '20px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText(text, x, y);
-    }
-    
-    // Comprobar colisiones
-    function collision(board, piece) {
-        const matrix = piece.matrix;
-        const pos = piece.position;
-        
-        for (let y = 0; y < matrix.length; y++) {
-            for (let x = 0; x < matrix[y].length; x++) {
-                if (matrix[y][x] !== 0 &&
-                    (board[y + pos.y] === undefined ||
-                     board[y + pos.y][x + pos.x] === undefined ||
-                     board[y + pos.y][x + pos.x] !== 0)) {
-                    return true;
-                }
-            }
-        }
-        
-        return false;
-    }
-    
-    // Mover la pieza
-    function movePiece(direction) {
-        if (paused || gameOver || animatingLines) return;
-        
-        piece.position.x += direction;
-        
-        if (collision(board, piece)) {
-            piece.position.x -= direction;
-        }
-        
-        drawBoard();
-    }
-    
-    // Rotación de la pieza
-    function rotatePiece() {
-        if (paused || gameOver || animatingLines) return;
-        
-        const originalMatrix = piece.matrix;
-        const originalPosition = { ...piece.position };
-        
-        // Hacer una copia profunda de la matriz
-        const matrix = piece.matrix.map(row => [...row]);
-        
-        // Tamaño de la matriz
-        const n = matrix.length;
-        
-        // Crear una nueva matriz para la rotación
-        const rotated = Array.from({ length: n }, () => Array(n).fill(0));
-        
-        // Rotación de 90 grados
-        for (let y = 0; y < n; y++) {
-            for (let x = 0; x < n; x++) {
-                rotated[x][n - 1 - y] = matrix[y][x];
-            }
-        }
-        
-        // Actualizar la matriz de la pieza
-        piece.matrix = rotated;
-        
-        // Comprobar colisiones después de la rotación
-        if (collision(board, piece)) {
-            // Intentar mover a la izquierda o derecha (wall kick)
-            const wallKickOffsets = [-1, 1, -2, 2];
-            
-            let wallKickSuccess = false;
-            
-            for (const offset of wallKickOffsets) {
-                piece.position.x += offset;
-                
-                if (!collision(board, piece)) {
-                    wallKickSuccess = true;
-                    break;
-                }
-                
-                piece.position.x -= offset;
-            }
-            
-            // Si no se puede colocar la pieza, revertir la rotación
-            if (!wallKickSuccess) {
-                piece.matrix = originalMatrix;
-                piece.position = originalPosition;
-            }
-        }
-        
-        drawBoard();
-    }
-    
-    // Bajar la pieza
-    function dropPiece() {
-        if (paused || gameOver || animatingLines) return;
-        
-        piece.position.y++;
-        
-        if (collision(board, piece)) {
-            piece.position.y--;
-            mergePiece();
-            checkLines();
-            generatePiece();
-        }
-        
-        drawBoard();
-    }
-    
-    // Caída rápida (hard drop)
-    function hardDrop() {
-        if (paused || gameOver || animatingLines) return;
-        
-        while (!collision(board, piece)) {
-            piece.position.y++;
-            score += 1; // Suma 1 punto por cada celda que baja
-        }
-        
-        piece.position.y--;
-        mergePiece();
-        checkLines();
-        generatePiece();
-        updateScore();
-        animateScore();
-        drawBoard();
-    }
-    
-    // Fusionar la pieza con el tablero
-    function mergePiece() {
-        piece.matrix.forEach((row, y) => {
-            row.forEach((value, x) => {
-                if (value !== 0) {
-                    board[y + piece.position.y][x + piece.position.x] = value;
-                }
-            });
-        });
-    }
-    
-    // Comprobar si hay líneas completas
-    function checkLines() {
-        linesToRemove = [];
-        
-        // Comprobar cada fila del tablero
-        for (let y = ROWS - 1; y >= 0; y--) {
-            let lineIsFull = true;
-            
-            for (let x = 0; x < COLS; x++) {
-                if (board[y][x] === 0) {
-                    lineIsFull = false;
-                    break;
-                }
-            }
-            
-            if (lineIsFull) {
-                linesToRemove.push(y);
-            }
-        }
-        
-        // Si hay líneas para eliminar, iniciar la animación
-        if (linesToRemove.length > 0) {
-            animatingLines = true;
-            animateLineRemoval();
-        }
-    }
-    
-    // Animar la eliminación de líneas
-    function animateLineRemoval() {
-        let flashCount = 0;
-        const maxFlashes = 3;
-        
-        const flashInterval = setInterval(() => {
-            flashCount++;
-            drawBoard(flashCount % 2 === 0);
-            
-            if (flashCount >= maxFlashes * 2) {
-                clearInterval(flashInterval);
-                removeLines();
-                animatingLines = false;
-            }
-        }, 100);
-    }
-    
-    // Eliminar líneas completas
-    function removeLines() {
-        const linesRemoved = linesToRemove.length;
-        
-        // Eliminar cada línea
-        linesToRemove.forEach(lineY => {
-            board.splice(lineY, 1);
-            board.unshift(Array(COLS).fill(0));
-        });
-        
-        // Actualizar la puntuación según el número de líneas eliminadas
-        let lineScore = 0;
-        switch (linesRemoved) {
-            case 1: lineScore = 100 * level; break;
-            case 2: lineScore = 300 * level; break;
-            case 3: lineScore = 500 * level; break;
-            case 4: lineScore = 800 * level; break; // Tetris!
-        }
-        
-        score += lineScore;
-        lines += linesRemoved;
-        
-        // Aumentar el nivel cada 10 líneas
-        const newLevel = Math.floor(lines / 10) + 1;
-        if (newLevel > level) {
-            level = newLevel;
-            dropInterval = Math.max(100, 1000 - (level - 1) * 100); // Acelerar la caída
-        }
-        
-        updateScore();
-        animateScore();
-        drawBoard();
-        
-        // Limpiar las líneas a eliminar
-        linesToRemove = [];
-    }
-    
-    // Actualizar y manejar la lógica del juego
-    function update(time = 0) {
-        const deltaTime = time - lastTime;
-        lastTime = time;
-        
-        if (!paused && !gameOver && !animatingLines) {
-            dropCounter += deltaTime;
-            if (dropCounter > dropInterval) {
-                dropPiece();
-                dropCounter = 0;
-            }
-        }
-        
-        drawBoard();
-        requestAnimationFrame(update);
-    }
-    
-    // Dibujar un bloque con gradiente
-    function drawBlock(x, y, color, size = currentBlockSize) {
-        const gradient = ctx.createLinearGradient(
-            x * size, 
-            y * size, 
-            x * size + size, 
-            y * size + size
-        );
-        
-        gradient.addColorStop(0, color.color1);
-        gradient.addColorStop(1, color.color2);
-        
-        ctx.fillStyle = gradient;
-        ctx.fillRect(x * size, y * size, size, size);
-        
-        // Borde más oscuro
-        ctx.strokeStyle = BORDER_COLOR;
-        ctx.lineWidth = BORDER_WIDTH;
-        ctx.strokeRect(x * size, y * size, size, size);
-        
-        // Brillo (esquina superior izquierda)
-        ctx.beginPath();
-        ctx.moveTo(x * size, y * size);
-        ctx.lineTo(x * size + size, y * size);
-        ctx.lineTo(x * size + size - size/4, y * size + size/4);
-        ctx.lineTo(x * size + size/4, y * size + size/4);
-        ctx.closePath();
-        ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
-        ctx.fill();
-        
-        // Sombra (esquina inferior derecha)
-        ctx.beginPath();
-        ctx.moveTo(x * size + size, y * size + size);
-        ctx.lineTo(x * size, y * size + size);
-        ctx.lineTo(x * size + size/4, y * size + size - size/4);
-        ctx.lineTo(x * size + size - size/4, y * size + size - size/4);
-        ctx.closePath();
-        ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
-        ctx.fill();
-    }
-    
-    // Dibujar el tablero y la pieza actual
-    function drawBoard(flash = false) {
-        // Limpiar el canvas
-        ctx.fillStyle = EMPTY_COLOR;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Dibujar el tablero
-        for (let y = 0; y < ROWS; y++) {
-            for (let x = 0; x < COLS; x++) {
-                if (board[y][x] !== 0) {
-                    // Verificar si esta línea debe parpadear (está siendo eliminada)
-                    if (flash && linesToRemove.includes(y)) {
-                        // Bloque blanco para efecto de flash
-                        ctx.fillStyle = '#FFF';
-                        ctx.fillRect(x * currentBlockSize, y * currentBlockSize, currentBlockSize, currentBlockSize);
-                    } else {
-                        // Dibujar el bloque normalmente
-                        drawBlock(x, y, COLORS[board[y][x]]);
-                    }
-                }
-            }
-        }
-        
-        // Dibujar la pieza actual
-        if (piece !== null && !gameOver) {
-            piece.matrix.forEach((row, y) => {
-                row.forEach((value, x) => {
-                    if (value !== 0) {
-                        drawBlock(x + piece.position.x, y + piece.position.y, COLORS[value]);
-                    }
-                });
-            });
-            
-            // Dibujar la sombra de la pieza (ghost piece)
-            if (!paused && !animatingLines) {
-                const ghostPiece = {
-                    matrix: piece.matrix,
-                    position: { x: piece.position.x, y: piece.position.y }
-                };
-                
-                // Encontrar la posición más baja posible
-                while (!collision(board, ghostPiece)) {
-                    ghostPiece.position.y++;
-                }
-                
-                // Retroceder una posición ya que la última colisiona
-                ghostPiece.position.y--;
-                
-                // Solo dibujar si la pieza fantasma está por debajo de la pieza actual
-                if (ghostPiece.position.y > piece.position.y) {
-                    ghostPiece.matrix.forEach((row, y) => {
-                        row.forEach((value, x) => {
-                            if (value !== 0) {
-                                // Dibujar un bloque transparente para la pieza fantasma
-                                ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-                                ctx.fillRect(
-                                    (x + ghostPiece.position.x) * currentBlockSize, 
-                                    (y + ghostPiece.position.y) * currentBlockSize, 
-                                    currentBlockSize, 
-                                    currentBlockSize
-                                );
-                                ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-                                ctx.lineWidth = 1;
-                                ctx.strokeRect(
-                                    (x + ghostPiece.position.x) * currentBlockSize, 
-                                    (y + ghostPiece.position.y) * currentBlockSize, 
-                                    currentBlockSize, 
-                                    currentBlockSize
-                                );
-                            }
-                        });
-                    });
-                }
-            }
-        }
-        
-        // Mensaje de pausa
-        if (paused && !gameOver) {
-            drawPausedOverlay();
-        }
-    }
-    
-    // Dibujar el overlay de pausa
-    function drawPausedOverlay() {
-        if (!gameOver) {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = 'white';
-            ctx.font = '20px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('PAUSADO', canvas.width / 2, canvas.height / 2);
-            ctx.fillText('Presiona PLAY para continuar', canvas.width / 2, canvas.height / 2 + 30);
-        }
-    }
-    
-    // Actualizar el botón de pausa/play
-    function updatePausePlayButton() {
-        if (paused) {
-            pausePlayBtn.innerHTML = '<i class="fas fa-play"></i>';
-        } else {
-            pausePlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        }
-    }
-    
-    // Manejar eventos del ratón para los botones de control
-    pausePlayBtn.addEventListener('click', () => {
-        if (!gameOver) {
-            paused = !paused;
-            updatePausePlayButton();
-            drawBoard();
-        }
-    });
-    
-    restartBtn.addEventListener('click', () => {
-        initGame();
-    });
-    
-    leftBtn.addEventListener('click', () => {
-        movePiece(-1);
-    });
-    
-    rightBtn.addEventListener('click', () => {
-        movePiece(1);
-    });
-    
-    downBtn.addEventListener('click', () => {
-        dropPiece();
-    });
-    
-    rotateBtn.addEventListener('click', () => {
-        rotatePiece();
-    });
-    
-    hardDropBtn.addEventListener('click', () => {
-        hardDrop();
-    });
-    
-    // Manejar eventos del teclado
-    document.addEventListener('keydown', (e) => {
-        if (gameOver) {
-            // Solo permitir reiniciar si el juego ha terminado
-            if (e.key === 'r' || e.key === 'R') {
-                initGame();
-            }
+    // Event listeners para controles
+    document.addEventListener('keydown', event => {
+        if (paused && !gameOver && event.keyCode === 80) { // P
+            togglePause();
             return;
         }
         
-        switch (e.key) {
-            case 'ArrowLeft':
-                movePiece(-1);
+        if (paused || gameOver) return;
+        
+        switch(event.keyCode) {
+            case 37: // Izquierda
+                playerMove(-1);
                 break;
-            case 'ArrowRight':
-                movePiece(1);
+            case 39: // Derecha
+                playerMove(1);
                 break;
-            case 'ArrowDown':
-                dropPiece();
+            case 40: // Abajo
+                playerDrop();
                 break;
-            case 'ArrowUp':
-                rotatePiece();
+            case 38: // Arriba (Rotar)
+                playerRotate(1);
                 break;
-            case ' ':
-                hardDrop();
+            case 32: // Espacio (Caída rápida)
+                playerHardDrop();
                 break;
-            case 'p':
-            case 'P':
-                paused = !paused;
-                updatePausePlayButton();
-                drawBoard();
-                break;
-            case 'r':
-            case 'R':
-                initGame();
+            case 80: // P (Pausar)
+                togglePause();
                 break;
         }
     });
     
-    // Manejar el redimensionamiento de la ventana
-    window.addEventListener('resize', () => {
-        currentBlockSize = resizeCanvas();
-        drawBoard();
+    // Eventos de botones
+    playButton.addEventListener('click', togglePause);
+    resetButton.addEventListener('click', resetGame);
+    
+    // Eventos táctiles para dispositivos móviles
+    let touchStartX = null;
+    let touchStartY = null;
+    
+    canvas.addEventListener('touchstart', event => {
+        if (paused || gameOver) return;
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+        event.preventDefault();
+    }, { passive: false });
+    
+    canvas.addEventListener('touchmove', event => {
+        if (paused || gameOver) return;
+        if (!touchStartX || !touchStartY) return;
+        
+        const touchX = event.touches[0].clientX;
+        const touchY = event.touches[0].clientY;
+        const diffX = touchX - touchStartX;
+        const diffY = touchY - touchStartY;
+        
+        // Detectar si el movimiento es horizontal o vertical
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            // Movimiento horizontal
+            if (diffX > 10) { // Derecha
+                playerMove(1);
+                touchStartX = touchX;
+            } else if (diffX < -10) { // Izquierda
+                playerMove(-1);
+                touchStartX = touchX;
+            }
+        } else {
+            // Movimiento vertical
+            if (diffY > 10) { // Abajo
+                playerDrop();
+                touchStartY = touchY;
+            } else if (diffY < -10) { // Arriba (rotar)
+                playerRotate(1);
+                touchStartY = touchY;
+            }
+        }
+        
+        event.preventDefault();
+    }, { passive: false });
+    
+    canvas.addEventListener('touchend', event => {
+        touchStartX = null;
+        touchStartY = null;
     });
     
-    // Iniciar el juego
-    initGame();
+    // Doble tap para caída rápida
+    let lastTap = 0;
+    canvas.addEventListener('touchend', event => {
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTap;
+        if (tapLength < 300 && tapLength > 0) {
+            playerHardDrop();
+            event.preventDefault();
+        }
+        lastTap = currentTime;
+    });
+    
+    // Iniciar juego
+    resetGame();
+    draw();
 }); 

@@ -9,81 +9,137 @@
 
 <section class="tetris-section">
     <div class="container">
-        <div class="tetris-container" data-aos="fade-up">
-            <div class="row g-4">
-                <div class="col-lg-8">
-                    <div class="game-wrapper">
-                        <div class="game-info mb-4">
-                            <div class="row align-items-center">
-                                <div class="col-md-8">
-                                    <div class="d-flex justify-content-between mb-0">
-                                        <div class="me-3"><strong>Puntuación:</strong> <span id="score" class="text-warning">0</span></div>
-                                        <div class="me-3"><strong>Nivel:</strong> <span id="level" class="text-info">1</span></div>
-                                        <div><strong>Líneas:</strong> <span id="lines" class="text-success">0</span></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mt-2 mt-md-0 d-flex justify-content-md-end justify-content-center">
-                                    <button id="pause-play-btn" class="btn btn-primary btn-lg me-2">
-                                        <i class="fas fa-play"></i>
-                                    </button>
-                                    <button id="restart-btn" class="btn btn-danger btn-lg">
-                                        <i class="fas fa-redo"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <canvas id="tetris" class="shadow-lg rounded mb-4"></canvas>
-                        
-                        <div class="tetris-controls">
-                            <button class="control-btn hover-scale me-2" id="left-btn" aria-label="Mover izquierda">
-                                <i class="fas fa-arrow-left"></i>
-                            </button>
-                            <button class="control-btn hover-scale me-2" id="down-btn" aria-label="Mover abajo">
-                                <i class="fas fa-arrow-down"></i>
-                            </button>
-                            <button class="control-btn hover-scale me-2" id="right-btn" aria-label="Mover derecha">
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                            <button class="control-btn hover-scale me-2" id="rotate-btn" aria-label="Rotar">
-                                <i class="fas fa-redo"></i>
-                            </button>
-                            <button class="control-btn hover-scale" id="hard-drop-btn" aria-label="Caída rápida">
-                                <i class="fas fa-angle-double-down"></i>
-                            </button>
-                        </div>
-                    </div>
+        <div class="game-wrapper">
+            <div class="container py-5">
+                <div class="text-center mb-4">
+                    <h1 class="display-4 gradient-text">Tetris</h1>
+                    <p class="lead fade-in">Relájate un momento y disfruta del clásico juego</p>
                 </div>
                 
-                <div class="col-lg-4">
-                    <div class="game-instructions card shadow-sm" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card-body">
-                            <h3 class="card-title">¿Cómo jugar?</h3>
-                            <p class="card-text">Usa las teclas de dirección o los botones para mover y rotar las piezas:</p>
-                            <ul class="list-group list-group-flush mb-3 list-stagger">
-                                <li class="list-group-item"><i class="fas fa-arrow-left text-primary me-2"></i> Mueve la pieza a la izquierda</li>
-                                <li class="list-group-item"><i class="fas fa-arrow-right text-primary me-2"></i> Mueve la pieza a la derecha</li>
-                                <li class="list-group-item"><i class="fas fa-arrow-down text-primary me-2"></i> Acelera la caída de la pieza</li>
-                                <li class="list-group-item"><i class="fas fa-redo text-primary me-2"></i> Rota la pieza</li>
-                                <li class="list-group-item"><i class="fas fa-angle-double-down text-primary me-2"></i> Caída inmediata</li>
-                                <li class="list-group-item"><i class="fas fa-play text-primary me-2"></i> / <i class="fas fa-pause text-primary me-2"></i> Iniciar / Pausar juego</li>
+                <div class="row g-4">
+                    <div class="col-lg-6 d-flex flex-column justify-content-center mb-4 mb-lg-0">
+                        <div class="game-instructions float-animation">
+                            <h3 class="mb-3"><i class="fas fa-gamepad me-2"></i>Instrucciones</h3>
+                            <ul class="staggered-fade-in">
+                                <li><i class="fas fa-arrow-left"></i> / <i class="fas fa-arrow-right"></i> - Mover izquierda/derecha</li>
+                                <li><i class="fas fa-arrow-up"></i> - Rotar pieza</li>
+                                <li><i class="fas fa-arrow-down"></i> - Mover hacia abajo</li>
+                                <li><span class="key-badge">Espacio</span> - Caída rápida</li>
+                                <li><span class="key-badge">P</span> - Pausar/Reanudar</li>
                             </ul>
-                            <p class="card-text mb-0">El objetivo es completar líneas horizontales. Cuantas más líneas completes a la vez, más puntos ganarás.</p>
-                            <div class="alert alert-primary mt-3" role="alert">
-                                <i class="fas fa-info-circle me-2"></i> El juego se ajusta automáticamente al tamaño de tu pantalla.
+                            <div class="mt-4">
+                                <button id="playButton" class="btn btn-primary btn-lg btn-pulse">
+                                    <i class="fas fa-play me-2"></i>Jugar
+                                </button>
+                                <button id="resetButton" class="btn btn-outline-light ms-2 hover-glow">
+                                    <i class="fas fa-redo me-2"></i>Reiniciar
+                                </button>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="card mt-4 shadow-sm bg-light">
-                        <div class="card-body text-center">
-                            <h4 class="card-title gradient-text">¿Disfrutando del juego?</h4>
-                            <p class="card-text">Cuando termines, no olvides contactarnos para tu proyecto de drywall.</p>
-                            <a href="/contacto" class="btn btn-primary btn-lg mt-2 btn-pulse">Solicitar Cotización</a>
+                    <div class="col-lg-6">
+                        <div class="tetris-container shadow-hover mx-auto">
+                            <div class="game-area-container">
+                                <div class="game-header">
+                                    <div>
+                                        <span>Nivel: </span>
+                                        <span id="levelDisplay" class="highlight-text">1</span>
+                                    </div>
+                                    <div>
+                                        <span>Líneas: </span>
+                                        <span id="linesDisplay" class="highlight-text">0</span>
+                                    </div>
+                                    <div>
+                                        <span>Puntos: </span>
+                                        <span id="scoreDisplay" class="highlight-text">0</span>
+                                    </div>
+                                </div>
+                                <canvas id="tetris" width="240" height="400" class="mx-auto d-block"></canvas>
+                                <div id="gameMessage" class="game-message fade-in">
+                                    <p>Presiona Jugar para comenzar</p>
+                                </div>
+                            </div>
+                            <div class="next-piece-container">
+                                <h4>Siguiente</h4>
+                                <canvas id="nextPiece" width="80" height="80" class="mx-auto d-block"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="card shadow-hover fade-in">
+                            <div class="card-body">
+                                <h3 class="card-title"><i class="fas fa-trophy me-2"></i>Récords</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-dark">
+                                        <thead>
+                                            <tr>
+                                                <th>Nivel</th>
+                                                <th>Líneas</th>
+                                                <th>Puntuación</th>
+                                                <th>Fecha</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>10</td>
+                                                <td>100</td>
+                                                <td>10,000</td>
+                                                <td>10/04/2024</td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>80</td>
+                                                <td>8,000</td>
+                                                <td>05/04/2024</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>50</td>
+                                                <td>5,000</td>
+                                                <td>01/04/2024</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section> 
+</section>
+
+<% if (typeof scripts === 'undefined') { %>
+<script>
+    let scripts = '';
+</script>
+<% } %>
+
+<script>
+    // Include custom script for Tetris
+    scripts += '<script src="/js/tetris.js"></script>';
+    
+    // Control de responsive para el juego
+    document.addEventListener('DOMContentLoaded', function() {
+        const adjustGameSize = () => {
+            const container = document.querySelector('.tetris-container');
+            const canvas = document.getElementById('tetris');
+            
+            if (window.innerWidth < 576) {
+                canvas.width = Math.min(240, container.offsetWidth - 20);
+                canvas.height = canvas.width * (400/240);
+            } else {
+                canvas.width = 240;
+                canvas.height = 400;
+            }
+        };
+        
+        window.addEventListener('resize', adjustGameSize);
+        adjustGameSize();
+    });
+</script> 
