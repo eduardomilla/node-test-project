@@ -13,27 +13,43 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="game-wrapper">
-                        <div class="game-info bg-dark text-white p-2 rounded mb-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="m-0"><strong>Puntuación:</strong> <span id="score">0</span></p>
-                                <button id="restart-btn" class="btn btn-sm btn-primary">Reiniciar Juego</button>
+                        <div class="game-info bg-dark text-white p-3 rounded mb-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="me-3"><strong>Puntuación:</strong> <span id="score" class="text-warning">0</span></div>
+                                        <div class="me-3"><strong>Nivel:</strong> <span id="level" class="text-info">1</span></div>
+                                        <div><strong>Líneas:</strong> <span id="lines" class="text-success">0</span></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mt-2 mt-md-0 d-flex justify-content-end">
+                                    <button id="pause-play-btn" class="btn btn-primary me-2">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <button id="restart-btn" class="btn btn-danger">
+                                        <i class="fas fa-redo"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         
                         <canvas id="tetris" class="shadow-lg rounded"></canvas>
                         
-                        <div class="tetris-controls mt-3 d-flex justify-content-center">
-                            <button class="control-btn scale-hover" id="left-btn">
+                        <div class="tetris-controls mt-4 d-flex justify-content-center flex-wrap">
+                            <button class="control-btn scale-hover me-3" id="left-btn" aria-label="Mover izquierda">
                                 <i class="fas fa-arrow-left"></i>
                             </button>
-                            <button class="control-btn scale-hover" id="down-btn">
+                            <button class="control-btn scale-hover me-3" id="down-btn" aria-label="Mover abajo">
                                 <i class="fas fa-arrow-down"></i>
                             </button>
-                            <button class="control-btn scale-hover" id="right-btn">
+                            <button class="control-btn scale-hover me-3" id="right-btn" aria-label="Mover derecha">
                                 <i class="fas fa-arrow-right"></i>
                             </button>
-                            <button class="control-btn scale-hover" id="rotate-btn">
+                            <button class="control-btn scale-hover me-3" id="rotate-btn" aria-label="Rotar">
                                 <i class="fas fa-redo"></i>
+                            </button>
+                            <button class="control-btn scale-hover" id="hard-drop-btn" aria-label="Caída rápida">
+                                <i class="fas fa-angle-double-down"></i>
                             </button>
                         </div>
                     </div>
@@ -49,6 +65,8 @@
                                 <li class="list-group-item"><i class="fas fa-arrow-right text-primary me-2"></i> Mueve la pieza a la derecha</li>
                                 <li class="list-group-item"><i class="fas fa-arrow-down text-primary me-2"></i> Acelera la caída de la pieza</li>
                                 <li class="list-group-item"><i class="fas fa-redo text-primary me-2"></i> Rota la pieza</li>
+                                <li class="list-group-item"><i class="fas fa-angle-double-down text-primary me-2"></i> Caída inmediata</li>
+                                <li class="list-group-item"><i class="fas fa-play text-primary me-2"></i> / <i class="fas fa-pause text-primary me-2"></i> Iniciar / Pausar juego</li>
                             </ul>
                             <p class="card-text">El objetivo es completar líneas horizontales. Cuantas más líneas completes a la vez, más puntos ganarás.</p>
                             <div class="alert alert-primary mt-3" role="alert">
@@ -57,7 +75,7 @@
                         </div>
                     </div>
                     
-                    <div class="card mt-3 shadow-sm bg-light">
+                    <div class="card mt-4 shadow-sm bg-light">
                         <div class="card-body text-center">
                             <h4 class="card-title">¿Disfrutando del juego?</h4>
                             <p class="card-text">Cuando termines, no olvides contactarnos para tu proyecto de drywall.</p>
