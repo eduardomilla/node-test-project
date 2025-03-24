@@ -1,18 +1,22 @@
 {
-  "name": "test-project",
+  "name": "drywall-pro",
   "version": "1.0.0",
   "description": "Sitio web de DrywallPro con juego de Tetris",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node server.js"
   },
   "keywords": [
     "drywall",
     "tetris",
-    "web"
+    "web",
+    "glitch"
   ],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "ejs": "^3.1.9",
     "express": "^4.18.2",
