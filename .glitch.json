@@ -1,0 +1,21 @@
+{
+  "install": "npm install",
+  "start": "npm start",
+  "watch": {
+    "ignore": [
+      "node_modules"
+    ],
+    "install": {
+      "include": [
+        "^package\\.json$"
+      ]
+    },
+    "restart": {
+      "include": [
+        "^server\\.js$",
+        "^views/",
+        "^public/"
+      ]
+    }
+  }
+} 
